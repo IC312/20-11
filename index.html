@@ -8,25 +8,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   RESET & TOKENS
-   ============================================================ */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
 
 :root{
-  --ink:        #33302a;
-  --ink-soft:   #5c564c;
-  --paper:      #fffdf6;
-  --paper-2:    #f7efdd;
-  --accent:     #c1553f;
-  --accent-2:   #e0795f;
-  --gold:       #c9a227;
-  --sky-1:      #6fb6e0;
-  --sky-2:      #9ed2ec;
-  --sky-3:      #cbe7f4;
-  --sky-4:      #f2ecdf;
-  --sky-5:      #fbeed6;
+  --ink:#33302a; --ink-soft:#5c564c;
+  --paper:#fffdf6; --paper-2:#f7efdd;
+  --accent:#c1553f; --accent-2:#e0795f; --gold:#c9a227;
+  --sky-1:#6fb6e0; --sky-2:#9ed2ec; --sky-3:#cbe7f4;
+  --sky-4:#f2ecdf; --sky-5:#fbeed6;
 }
 
 body{
@@ -38,97 +28,67 @@ body{
   text-rendering: optimizeLegibility;
 }
 
-/* ============================================================
-   SKY BACKGROUND
-   ============================================================ */
 .sky{
   position: fixed; inset: 0; z-index: 0;
   background: linear-gradient(175deg,
-      var(--sky-1) 0%,
-      var(--sky-2) 26%,
-      var(--sky-3) 52%,
-      var(--sky-4) 78%,
-      var(--sky-5) 100%);
+      var(--sky-1) 0%, var(--sky-2) 26%, var(--sky-3) 52%,
+      var(--sky-4) 78%, var(--sky-5) 100%);
   overflow: hidden;
 }
-
 .sun{
-  position: absolute;
-  top: -8vmin; right: 4vmin;
-  width: 42vmin; height: 42vmin;
-  border-radius: 50%;
+  position: absolute; top: -8vmin; right: 4vmin;
+  width: 42vmin; height: 42vmin; border-radius: 50%;
   background: radial-gradient(circle at 50% 50%,
-      rgba(255,252,235,1) 0%,
-      rgba(255,246,214,.92) 22%,
-      rgba(255,240,200,.45) 45%,
-      rgba(255,236,190,0) 72%);
+      rgba(255,252,235,1) 0%, rgba(255,246,214,.92) 22%,
+      rgba(255,240,200,.45) 45%, rgba(255,236,190,0) 72%);
   filter: blur(2px);
   animation: sunPulse 9s ease-in-out infinite;
 }
 @keyframes sunPulse{
-  0%,100%{ transform: scale(1);   opacity: .95; }
-  50%    { transform: scale(1.06); opacity: 1;  }
+  0%,100%{ transform: scale(1); opacity: .95; }
+  50%    { transform: scale(1.06); opacity: 1; }
 }
 .sun-core{
-  position: absolute;
-  top: 3vmin; right: 15vmin;
-  width: 14vmin; height: 14vmin;
-  border-radius: 50%;
+  position: absolute; top: 3vmin; right: 15vmin;
+  width: 14vmin; height: 14vmin; border-radius: 50%;
   background: radial-gradient(circle at 40% 35%, #fffef8, #fff3cf 60%, #ffe9ae 100%);
   box-shadow: 0 0 12vmin 4vmin rgba(255, 240, 190, .55);
   animation: sunPulse 9s ease-in-out infinite;
 }
-
 .rays{
-  position: absolute;
-  top: -30vmin; right: -20vmin;
+  position: absolute; top: -30vmin; right: -20vmin;
   width: 110vmin; height: 110vmin;
   background: conic-gradient(from 200deg,
-      rgba(255,255,255,0) 0deg,
-      rgba(255,255,255,.18) 6deg,
-      rgba(255,255,255,0) 13deg,
-      rgba(255,255,255,0) 26deg,
-      rgba(255,255,255,.14) 32deg,
-      rgba(255,255,255,0) 40deg,
-      rgba(255,255,255,0) 55deg,
-      rgba(255,255,255,.16) 61deg,
-      rgba(255,255,255,0) 70deg,
-      rgba(255,255,255,0) 360deg);
-  filter: blur(14px);
-  opacity: .85;
+      rgba(255,255,255,0) 0deg, rgba(255,255,255,.18) 6deg,
+      rgba(255,255,255,0) 13deg, rgba(255,255,255,0) 26deg,
+      rgba(255,255,255,.14) 32deg, rgba(255,255,255,0) 40deg,
+      rgba(255,255,255,0) 55deg, rgba(255,255,255,.16) 61deg,
+      rgba(255,255,255,0) 70deg, rgba(255,255,255,0) 360deg);
+  filter: blur(14px); opacity: .85;
   animation: rayDrift 26s linear infinite;
   pointer-events: none;
 }
 @keyframes rayDrift{ to{ transform: rotate(360deg); } }
 
 .cloud{
-  position: absolute;
-  background: rgba(255,255,255,.92);
-  border-radius: 999px;
-  filter: blur(16px);
-  opacity: .82;
+  position: absolute; background: rgba(255,255,255,.92);
+  border-radius: 999px; filter: blur(16px); opacity: .82;
   will-change: transform;
 }
 .cloud::before, .cloud::after{
-  content:'';
-  position: absolute;
-  background: inherit;
-  border-radius: 50%;
+  content:''; position: absolute; background: inherit; border-radius: 50%;
 }
 .cloud::before{ width: 62%; height: 175%; top: -78%; left: 12%; }
 .cloud::after { width: 44%; height: 140%; top: -56%; right: 14%; }
-
-.c1{ width: 44vmin; height: 11vmin; top: 14%;  left: -50vmin; animation: drift 68s linear infinite; }
-.c2{ width: 30vmin; height: 8vmin;  top: 30%;  left: -50vmin; opacity:.65; animation: drift 92s linear infinite 8s; }
-.c3{ width: 58vmin; height: 14vmin; top: 52%;  left: -70vmin; opacity:.55; animation: drift 110s linear infinite 22s; }
-.c4{ width: 24vmin; height: 7vmin;  top: 68%;  left: -40vmin; opacity:.5;  animation: drift 76s linear infinite 40s; }
-.c5{ width: 36vmin; height: 10vmin; top: 8%;   left: -50vmin; opacity:.7;  animation: drift 88s linear infinite 55s; }
-
+.c1{ width: 44vmin; height: 11vmin; top: 14%; left: -50vmin; animation: drift 68s linear infinite; }
+.c2{ width: 30vmin; height: 8vmin;  top: 30%; left: -50vmin; opacity:.65; animation: drift 92s linear infinite 8s; }
+.c3{ width: 58vmin; height: 14vmin; top: 52%; left: -70vmin; opacity:.55; animation: drift 110s linear infinite 22s; }
+.c4{ width: 24vmin; height: 7vmin;  top: 68%; left: -40vmin; opacity:.5;  animation: drift 76s linear infinite 40s; }
+.c5{ width: 36vmin; height: 10vmin; top: 8%;  left: -50vmin; opacity:.7;  animation: drift 88s linear infinite 55s; }
 @keyframes drift{
   from{ transform: translateX(0); }
   to  { transform: translateX(calc(100vw + 90vmin)); }
 }
-
 .haze{
   position: absolute; inset: 0;
   background:
@@ -137,136 +97,80 @@ body{
   pointer-events: none;
 }
 
-#petals{
-  position: fixed; inset: 0;
-  z-index: 2;
-  pointer-events: none;
-}
+#petals{ position: fixed; inset: 0; z-index: 2; pointer-events: none; }
 
-/* ============================================================
-   TRAIL + PAPER PLANE
-   ============================================================ */
 .trail-svg{
-  position: fixed; inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  transition: opacity 1.4s ease;
+  position: fixed; inset: 0; z-index: 3;
+  pointer-events: none; transition: opacity 1.4s ease;
 }
 #trailPath{
-  fill: none;
-  stroke: rgba(255,255,255,.85);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
+  fill: none; stroke: rgba(255,255,255,.85);
+  stroke-width: 2.5; stroke-linecap: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
   filter: drop-shadow(0 0 6px rgba(255,255,255,.9));
 }
-
 .plane{
-  position: fixed;
-  top: 0; left: 0;
-  width: 74px; height: 74px;
-  z-index: 4;
-  opacity: 0;
-  will-change: transform, opacity;
-  pointer-events: none;
-  transition: opacity .9s ease;
+  position: fixed; top: 0; left: 0;
+  width: 74px; height: 74px; z-index: 4;
+  opacity: 0; will-change: transform, opacity;
+  pointer-events: none; transition: opacity .9s ease;
   filter: drop-shadow(0 10px 14px rgba(60,90,120,.28));
 }
 .plane svg{ width: 100%; height: 100%; display: block; }
 
-/* ============================================================
-   TITLE
-   ============================================================ */
 .title-block{
-  position: fixed;
-  top: clamp(38px, 11vh, 130px);
-  left: 0; right: 0;
-  z-index: 6;
-  text-align: center;
-  padding: 0 22px;
-  pointer-events: none;
+  position: fixed; top: clamp(38px, 11vh, 130px);
+  left: 0; right: 0; z-index: 6; text-align: center;
+  padding: 0 22px; pointer-events: none;
   transition: opacity .9s ease, transform .9s ease;
 }
-.title-block.dim{
-  opacity: .0;
-  transform: translateY(-14px);
-}
+.title-block.dim{ opacity: 0; transform: translateY(-14px); }
 .kicker{
-  margin: 0 0 14px;
-  font-size: clamp(10px, 1.35vw, 12.5px);
-  letter-spacing: .42em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: rgba(45, 70, 92, .68);
+  margin: 0 0 14px; font-size: clamp(10px, 1.35vw, 12.5px);
+  letter-spacing: .42em; text-transform: uppercase;
+  font-weight: 500; color: rgba(45, 70, 92, .68);
 }
 .title-block h1{
-  margin: 0;
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  font-size: clamp(30px, 6.2vw, 68px);
-  line-height: 1.06;
-  letter-spacing: -.015em;
-  color: #2b4155;
-  text-shadow: 0 2px 24px rgba(255,255,255,.55);
+  margin: 0; font-family: 'Playfair Display', serif;
+  font-weight: 600; font-size: clamp(30px, 6.2vw, 68px);
+  line-height: 1.06; letter-spacing: -.015em;
+  color: #2b4155; text-shadow: 0 2px 24px rgba(255,255,255,.55);
 }
 .title-block h1 em{
-  font-style: italic;
-  font-weight: 500;
-  color: var(--accent);
+  font-style: italic; font-weight: 500; color: var(--accent);
 }
 .subtitle{
-  margin: 16px 0 0;
-  font-size: clamp(12px, 1.8vw, 15px);
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  font-weight: 400;
-  color: rgba(45, 70, 92, .62);
+  margin: 16px 0 0; font-size: clamp(12px, 1.8vw, 15px);
+  letter-spacing: .3em; text-transform: uppercase;
+  font-weight: 400; color: rgba(45, 70, 92, .62);
 }
 
-/* ============================================================
-   ENVELOPE
-   ============================================================ */
 .envelope-stage{
-  position: fixed; inset: 0;
-  z-index: 7;
-  display: grid;
-  place-items: center;
+  position: fixed; inset: 0; z-index: 7;
+  display: grid; place-items: center;
   pointer-events: none;
   transition: opacity .7s ease, transform .7s cubic-bezier(.4,0,.2,1), filter .7s ease;
 }
 .envelope-stage.landed{ pointer-events: auto; cursor: pointer; }
 .envelope-stage.gone{
-  opacity: 0;
-  transform: scale(.86);
-  filter: blur(6px);
+  opacity: 0; transform: scale(.86); filter: blur(6px);
   pointer-events: none;
 }
-
 .envelope-drop{
-  transform: translateY(-115vh) rotate(-20deg);
-  opacity: 0;
+  transform: translateY(-115vh) rotate(-20deg); opacity: 0;
 }
-.envelope-drop.fall{
-  animation: envelopeDrop 2.1s cubic-bezier(.35,.02,.3,1) forwards;
-}
+.envelope-drop.fall{ animation: envelopeDrop 2.1s cubic-bezier(.35,.02,.3,1) forwards; }
 @keyframes envelopeDrop{
   0%   { transform: translateY(-115vh) rotate(-22deg); opacity: 0; }
   8%   { opacity: 1; }
-  55%  { transform: translateY(14px) rotate(5deg);  opacity: 1; }
+  55%  { transform: translateY(14px) rotate(5deg); opacity: 1; }
   70%  { transform: translateY(-14px) rotate(-3.5deg); }
   84%  { transform: translateY(6px) rotate(1.6deg); }
   94%  { transform: translateY(-3px) rotate(-.7deg); }
   100% { transform: translateY(0) rotate(0deg); opacity: 1; }
 }
-
-.envelope-holder{
-  position: relative;
-  transform: translateY(-2vh);
-}
-.envelope-holder.idle{
-  animation: envFloat 5.5s ease-in-out infinite;
-}
+.envelope-holder{ position: relative; transform: translateY(-2vh); }
+.envelope-holder.idle{ animation: envFloat 5.5s ease-in-out infinite; }
 @keyframes envFloat{
   0%,100%{ transform: translateY(-2vh); }
   50%    { transform: translateY(calc(-2vh - 14px)); }
@@ -280,16 +184,12 @@ body{
   perspective: 1400px;
   filter: drop-shadow(0 30px 44px rgba(48, 70, 96, .28));
 }
-
 .env-back{
-  position: absolute; inset: 0;
-  border-radius: 10px;
+  position: absolute; inset: 0; border-radius: 10px;
   background: linear-gradient(160deg, #fdf8ea 0%, #f3e8d1 100%);
 }
-
 .env-letter{
-  position: absolute;
-  left: 6%; top: 7%;
+  position: absolute; left: 6%; top: 7%;
   width: 88%; height: 86%;
   background: linear-gradient(180deg, #fffefa, #fdf9ee);
   border-radius: 5px;
@@ -299,15 +199,13 @@ body{
   overflow: hidden;
 }
 .env-letter::before{
-  content:'';
-  position:absolute; inset: 18% 14% auto 14%;
+  content:''; position:absolute; inset: 18% 14% auto 14%;
   height: 6px;
   background: repeating-linear-gradient(90deg, rgba(160,150,130,.35) 0 26px, transparent 26px 40px);
   border-radius: 3px;
 }
 .env-letter::after{
-  content:'';
-  position:absolute; inset: 34% 14% auto 14%;
+  content:''; position:absolute; inset: 34% 14% auto 14%;
   height: 6px;
   background: repeating-linear-gradient(90deg, rgba(160,150,130,.28) 0 20px, transparent 20px 40px);
   border-radius: 3px;
@@ -315,11 +213,8 @@ body{
 .envelope.lift .env-letter{
   transform: translateY(-46%) rotate(-1.5deg);
 }
-
 .env-pocket{
-  position: absolute; inset: 0;
-  z-index: 3;
-  pointer-events: none;
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
 }
 .env-pocket::before{
   content:''; position:absolute; inset:0;
@@ -340,10 +235,8 @@ body{
   border-radius: 0 0 10px 10px;
   z-index: 4;
 }
-
 .env-flap{
-  position: absolute;
-  left: 0; top: 0;
+  position: absolute; left: 0; top: 0;
   width: 100%; height: 53%;
   background: linear-gradient(180deg, #fbf3e0, #efe1c3);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
@@ -353,51 +246,37 @@ body{
   transition: transform .85s cubic-bezier(.62,.02,.32,1);
   z-index: 6;
 }
-.envelope.open .env-flap{
-  transform: rotateX(-176deg);
-}
+.envelope.open .env-flap{ transform: rotateX(-176deg); }
 
-/* Ribbon — flush với mép phong thư */
 .ribbon-v, .ribbon-h{
-  position: absolute;
-  z-index: 8;
+  position: absolute; z-index: 8;
   background: linear-gradient(90deg, #a83c28, #d9694e 45%, #a83c28);
   box-shadow: 0 1px 4px rgba(90,30,20,.25);
   transition: transform .55s cubic-bezier(.5,0,.9,.4), opacity .5s ease;
 }
 .ribbon-v{
-  left: 50%; top: 0; bottom: 0;
-  width: 14px;
-  transform: translateX(-50%);
-  border-radius: 2px;
+  left: 50%; top: 0; bottom: 0; width: 14px;
+  transform: translateX(-50%); border-radius: 2px;
 }
 .ribbon-h{
-  top: 50%; left: 0; right: 0;
-  height: 14px;
-  transform: translateY(-50%);
-  border-radius: 2px;
+  top: 50%; left: 0; right: 0; height: 14px;
+  transform: translateY(-50%); border-radius: 2px;
   background: linear-gradient(180deg, #a83c28, #d9694e 45%, #a83c28);
 }
 .envelope.opening .ribbon-v{
-  transform: translateX(-50%) translateY(130%);
-  opacity: 0;
+  transform: translateX(-50%) translateY(130%); opacity: 0;
 }
 .envelope.opening .ribbon-h{
-  transform: translateY(-50%) translateX(-130%);
-  opacity: 0;
+  transform: translateY(-50%) translateX(-130%); opacity: 0;
 }
-
 .bow{
-  position: absolute;
-  left: 50%; top: 50%;
+  position: absolute; left: 50%; top: 50%;
   width: 86px; height: 54px;
-  transform: translate(-50%, -50%);
-  z-index: 9;
+  transform: translate(-50%, -50%); z-index: 9;
   transition: transform .5s cubic-bezier(.5,0,1,.5), opacity .45s ease;
 }
 .bow-loop{
-  position: absolute;
-  top: 50%;
+  position: absolute; top: 50%;
   width: 40px; height: 30px;
   background: linear-gradient(135deg, #e07d5f, #b8452f);
   border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
@@ -406,30 +285,23 @@ body{
 .bow-loop.l{ left: 0;  transform: translateY(-50%) rotate(-16deg); }
 .bow-loop.r{ right: 0; transform: translateY(-50%) rotate(16deg);  }
 .bow-knot{
-  position: absolute;
-  left: 50%; top: 50%;
+  position: absolute; left: 50%; top: 50%;
   width: 20px; height: 20px;
-  transform: translate(-50%,-50%);
-  border-radius: 50%;
+  transform: translate(-50%,-50%); border-radius: 50%;
   background: linear-gradient(135deg, #ec8f72, #c04d36);
   box-shadow: 0 2px 6px rgba(110,35,22,.35);
 }
 .envelope.opening .bow{
-  transform: translate(-50%,-50%) scale(.15) rotate(50deg);
-  opacity: 0;
+  transform: translate(-50%,-50%) scale(.15) rotate(50deg); opacity: 0;
 }
 
 .env-hint{
-  position: absolute;
-  bottom: clamp(28px, 9vh, 90px);
-  left: 0; right: 0;
-  text-align: center;
+  position: absolute; bottom: clamp(28px, 9vh, 90px);
+  left: 0; right: 0; text-align: center;
   font-size: clamp(11px, 1.5vw, 13px);
-  letter-spacing: .26em;
-  text-transform: uppercase;
+  letter-spacing: .26em; text-transform: uppercase;
   color: rgba(45, 70, 92, .7);
-  opacity: 0;
-  transition: opacity .8s ease;
+  opacity: 0; transition: opacity .8s ease;
   pointer-events: none;
 }
 .env-hint.show{ opacity: 1; animation: hintPulse 2.4s ease-in-out infinite; }
@@ -438,34 +310,22 @@ body{
   50%    { opacity: 1; }
 }
 
-/* ============================================================
-   LETTER
-   ============================================================ */
 .letter-stage{
-  position: fixed; inset: 0;
-  z-index: 9;
-  display: grid;
-  place-items: center;
+  position: fixed; inset: 0; z-index: 9;
+  display: grid; place-items: center;
   padding: clamp(14px, 3vh, 32px) clamp(14px, 4vw, 32px);
-  opacity: 0;
-  pointer-events: none;
+  opacity: 0; pointer-events: none;
   transition: opacity .8s ease;
 }
-.letter-stage.show{
-  opacity: 1;
-  pointer-events: auto;
-}
-
+.letter-stage.show{ opacity: 1; pointer-events: auto; }
 .letter-card{
   position: relative;
   width: min(660px, 100%);
   max-height: min(88vh, 840px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  overflow-y: auto; overscroll-behavior: contain;
   padding: clamp(28px, 4.5vw, 56px) clamp(24px, 5vw, 60px) clamp(28px, 4vw, 48px);
   border-radius: 6px;
-  background:
-    linear-gradient(180deg, #fffdf8 0%, #fdf8ec 100%);
+  background: linear-gradient(180deg, #fffdf8 0%, #fdf8ec 100%);
   box-shadow:
     0 2px 0 rgba(255,255,255,.9) inset,
     0 40px 90px -20px rgba(40, 62, 88, .45),
@@ -478,21 +338,16 @@ body{
 }
 .letter-stage.show .letter-card{
   transform: translateY(0) scale(1) rotateX(0deg);
-  opacity: 1;
-  transition-delay: .1s;
+  opacity: 1; transition-delay: .1s;
 }
 .letter-card::-webkit-scrollbar{ width: 7px; }
 .letter-card::-webkit-scrollbar-thumb{
-  background: rgba(170,150,120,.4);
-  border-radius: 10px;
+  background: rgba(170,150,120,.4); border-radius: 10px;
 }
 .letter-card::-webkit-scrollbar-track{ background: transparent; }
-
 .letter-card::before{
-  content:'';
-  position: absolute; inset: 0;
-  pointer-events: none;
-  border-radius: 6px;
+  content:''; position: absolute; inset: 0;
+  pointer-events: none; border-radius: 6px;
   background-image:
     radial-gradient(circle at 12% 22%, rgba(190,170,130,.06) 0 1.5px, transparent 2px),
     radial-gradient(circle at 68% 58%, rgba(190,170,130,.05) 0 1.5px, transparent 2px),
@@ -500,32 +355,23 @@ body{
   background-size: 140px 140px, 180px 180px, 120px 120px;
   opacity: .8;
 }
-
 .letter-card::after{
-  content:'';
-  position: absolute;
-  left: clamp(18px, 3.5vw, 40px);
-  top: 0; bottom: 0;
+  content:''; position: absolute;
+  left: clamp(18px, 3.5vw, 40px); top: 0; bottom: 0;
   width: 1px;
   background: linear-gradient(180deg, transparent, rgba(193,85,63,.16) 8%, rgba(193,85,63,.16) 92%, transparent);
   pointer-events: none;
 }
-
 .letter-head{
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 18px;
-  padding-left: clamp(6px, 2vw, 22px);
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 18px; padding-left: clamp(6px, 2vw, 22px);
   margin-bottom: clamp(20px, 3.4vw, 34px);
 }
 .letter-to{
   margin: 6px 0 0;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
+  font-family: 'Playfair Display', serif; font-style: italic;
   font-size: clamp(19px, 3.4vw, 27px);
-  color: #2f4358;
-  line-height: 1.3;
+  color: #2f4358; line-height: 1.3;
 }
 .stamp{
   flex: none;
@@ -535,44 +381,28 @@ body{
   background:
     linear-gradient(135deg, rgba(255,255,255,.9), rgba(255,255,255,0) 60%),
     linear-gradient(160deg, #e9b9a8, #c1553f);
-  display: grid;
-  place-items: center;
-  text-align: center;
+  display: grid; place-items: center; text-align: center;
   color: #fff8f2;
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
+  font-family: 'Playfair Display', serif; font-weight: 700;
   font-size: clamp(15px, 2.4vw, 19px);
-  line-height: 1;
-  letter-spacing: .04em;
+  line-height: 1; letter-spacing: .04em;
   box-shadow: 0 2px 8px rgba(120,60,40,.28);
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
 }
 .stamp span{
-  display: block;
-  font-size: .62em;
-  letter-spacing: .18em;
-  margin-top: 3px;
-  opacity: .9;
+  display: block; font-size: .62em;
+  letter-spacing: .18em; margin-top: 3px; opacity: .9;
 }
 .stamp::after{
-  content:'';
-  position: absolute; inset: 4px;
-  border: 1px dashed rgba(255,255,255,.45);
-  border-radius: 2px;
+  content:''; position: absolute; inset: 4px;
+  border: 1px dashed rgba(255,255,255,.45); border-radius: 2px;
 }
-
-.letter-body{
-  padding-left: clamp(6px, 2vw, 22px);
-}
+.letter-body{ padding-left: clamp(6px, 2vw, 22px); }
 .letter-body p{
   margin: 0 0 1.15em;
   font-size: clamp(14px, 1.85vw, 16.5px);
-  line-height: 1.95;
-  font-weight: 300;
-  color: var(--ink-soft);
-  opacity: 0;
-  transform: translateY(14px);
+  line-height: 1.95; font-weight: 300; color: var(--ink-soft);
+  opacity: 0; transform: translateY(14px);
 }
 .letter-stage.show .letter-body p{
   animation: lineIn .85s cubic-bezier(.22,1,.36,1) forwards;
@@ -585,15 +415,8 @@ body{
 .letter-stage.show .letter-body p:nth-child(6){ animation-delay: .90s; }
 .letter-stage.show .letter-body p:nth-child(7){ animation-delay: 1.02s; }
 .letter-stage.show .letter-body p:nth-child(8){ animation-delay: 1.14s; }
-
-@keyframes lineIn{
-  to{ opacity: 1; transform: translateY(0); }
-}
-
-.letter-body p strong{
-  font-weight: 500;
-  color: #2f4358;
-}
+@keyframes lineIn{ to{ opacity: 1; transform: translateY(0); } }
+.letter-body p strong{ font-weight: 500; color: #2f4358; }
 
 .signature{
   margin: clamp(22px, 4vw, 36px) 0 0;
@@ -601,12 +424,8 @@ body{
   text-align: right;
   font-family: 'Dancing Script', 'Caveat', cursive;
   font-size: clamp(28px, 5vw, 40px);
-  font-weight: 600;
-  letter-spacing: .01em;
-  line-height: 1.25;
-  color: var(--accent);
-  opacity: 0;
-  transform: translateY(14px);
+  font-weight: 600; letter-spacing: .01em; line-height: 1.25;
+  color: var(--accent); opacity: 0; transform: translateY(14px);
   font-display: swap;
 }
 .letter-stage.show .signature{
@@ -616,26 +435,18 @@ body{
   display: block;
   font-family: 'Be Vietnam Pro', sans-serif;
   font-size: clamp(9px, 1.3vw, 10.5px);
-  font-weight: 500;
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  color: rgba(120,105,85,.7);
-  margin-top: 2px;
+  font-weight: 500; letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(120,105,85,.7); margin-top: 2px;
 }
-
 .cta{
   display: block;
   margin: clamp(28px, 4.5vw, 42px) auto 4px;
   padding: 15px 34px;
-  border: none;
-  border-radius: 999px;
+  border: none; border-radius: 999px;
   background: linear-gradient(135deg, #d9694e, #b8452f);
-  color: #fff8f2;
-  font-family: inherit;
+  color: #fff8f2; font-family: inherit;
   font-size: clamp(12.5px, 1.7vw, 14px);
-  font-weight: 500;
-  letter-spacing: .16em;
-  text-transform: uppercase;
+  font-weight: 500; letter-spacing: .16em; text-transform: uppercase;
   cursor: pointer;
   box-shadow: 0 12px 26px -8px rgba(170, 60, 40, .65), 0 2px 0 rgba(255,255,255,.3) inset;
   transition: transform .35s cubic-bezier(.34,1.5,.64,1), box-shadow .35s ease, filter .35s ease;
@@ -651,59 +462,37 @@ body{
 }
 .cta:active{ transform: translateY(-1px) scale(.99); }
 
-/* ============================================================
-   FINALE
-   ============================================================ */
 .finale{
-  position: fixed; inset: 0;
-  z-index: 11;
-  display: grid;
-  place-items: center;
-  padding: 24px;
+  position: fixed; inset: 0; z-index: 11;
+  display: grid; place-items: center; padding: 24px;
   text-align: center;
-  opacity: 0;
-  pointer-events: none;
+  opacity: 0; pointer-events: none;
   transition: opacity 1.1s ease;
   background: radial-gradient(ellipse at 50% 45%, rgba(255,250,238,.92), rgba(255,250,238,.55) 45%, rgba(255,250,238,0) 78%);
 }
 .finale.show{ opacity: 1; pointer-events: auto; }
-
 .finale-inner{
   max-width: 720px;
   transform: translateY(24px) scale(.96);
   transition: transform 1.2s cubic-bezier(.22,1,.36,1);
 }
 .finale.show .finale-inner{ transform: translateY(0) scale(1); }
-
 .finale h2{
   margin: 0 0 18px;
   font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  font-size: clamp(26px, 5.4vw, 56px);
-  line-height: 1.16;
-  letter-spacing: -.015em;
-  color: #2b4155;
+  font-weight: 600; font-size: clamp(26px, 5.4vw, 56px);
+  line-height: 1.16; letter-spacing: -.015em; color: #2b4155;
 }
 .finale h2 em{
-  display: block;
-  font-style: italic;
-  font-weight: 500;
-  color: var(--accent);
-  font-size: .82em;
-  margin-top: 6px;
+  display: block; font-style: italic; font-weight: 500;
+  color: var(--accent); font-size: .82em; margin-top: 6px;
 }
 .finale .finale-sub{
-  margin: 0 auto 0;
-  max-width: 520px;
+  margin: 0 auto 0; max-width: 520px;
   font-size: clamp(13.5px, 1.9vw, 16px);
-  line-height: 1.85;
-  font-weight: 300;
-  color: var(--ink-soft);
+  line-height: 1.85; font-weight: 300; color: var(--ink-soft);
 }
 
-/* ============================================================
-   REDUCED MOTION
-   ============================================================ */
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .15s !important; }
   .sun, .rays, .cloud{ animation: none !important; }
@@ -712,7 +501,6 @@ body{
 </head>
 <body>
 
-<!-- ==================== SKY ==================== -->
 <div class="sky" aria-hidden="true">
   <div class="rays"></div>
   <div class="sun"></div>
@@ -725,10 +513,8 @@ body{
   <div class="haze"></div>
 </div>
 
-<!-- ==================== PETALS ==================== -->
 <canvas id="petals" aria-hidden="true"></canvas>
 
-<!-- ==================== TRAIL + PLANE ==================== -->
 <svg class="trail-svg" id="trailSvg" aria-hidden="true">
   <path id="trailPath" pathLength="1"></path>
 </svg>
@@ -742,14 +528,12 @@ body{
   </svg>
 </div>
 
-<!-- ==================== TITLE ==================== -->
 <header class="title-block" id="titleBlock">
   <p class="kicker">20 · 11 · Ngày Nhà giáo Việt Nam</p>
   <h1>A Letter <em>for</em> Teachers</h1>
   <p class="subtitle">Chuyến bay tri ân</p>
 </header>
 
-<!-- ==================== ENVELOPE ==================== -->
 <div class="envelope-stage" id="envelopeStage">
   <div class="envelope-holder" id="envelopeHolder">
     <div class="envelope-drop" id="envelopeDrop">
@@ -772,36 +556,27 @@ body{
   <div class="env-hint" id="envHint">Chạm để mở lá thư</div>
 </div>
 
-<!-- ==================== LETTER ==================== -->
 <div class="letter-stage" id="letterStage">
   <article class="letter-card" id="letterCard">
     <div class="letter-head">
       <p class="letter-to" id="letterTo">Kính gửi Thầy, Cô,</p>
       <div class="stamp">20<span>11</span></div>
     </div>
-
     <div class="letter-body" id="letterBody">
       <p>Có những chuyến bay không cần đến sân bay. Chỉ cần một tờ giấy, vài nếp gấp, và một niềm tin rằng lời cảm ơn rồi sẽ tìm được đúng người để trao.</p>
-
       <p>Chiếc máy bay giấy nhỏ này mang theo lời tri ân của chúng em — những đứa học trò từng ngồi dưới mái trường, từng run tay khi bị gọi lên bảng, từng lén nhìn thầy cô viết bảng mỗi sớm mai.</p>
-
       <p>Thầy cô đã dạy chúng em đọc một con chữ, viết một ước mơ, và hơn hết — dạy chúng em cách trở thành một người tử tế. Những điều ấy <strong>không nằm trong sách giáo khoa</strong>, nhưng lại là hành trang lớn nhất chúng em mang theo suốt cuộc đời.</p>
-
       <p>Ngày 20/11 này, chúng em không gửi hoa, cũng chẳng gửi quà. Chúng em chỉ gửi một chuyến bay nhỏ xíu chở đầy lời cảm ơn, và một lời hẹn: <strong>chúng em sẽ bay thật xa, nhưng sẽ không bao giờ quên nơi mình đã học cách cất cánh.</strong></p>
-
       <p>Kính chúc Thầy Cô thật nhiều sức khoẻ, bình an, và luôn giữ được ngọn lửa của người gieo chữ.</p>
     </div>
-
     <p class="signature">
       <span id="signatureName">Học trò của Thầy Cô</span>
       <small id="signatureSub">With love · 20.11</small>
     </p>
-
     <button class="cta" id="ctaBtn" type="button">Gửi lời tri ân ✈</button>
   </article>
 </div>
 
-<!-- ==================== FINALE ==================== -->
 <section class="finale" id="finale">
   <div class="finale-inner">
     <p class="kicker">20 · 11</p>
@@ -811,26 +586,21 @@ body{
 </section>
 
 <script>
-/* ============================================================
-   0. HELPERS
-   ============================================================ */
 const $ = (id) => document.getElementById(id);
 const easeInOutSine = (t) => -(Math.cos(Math.PI * t) - 1) / 2;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
 /* ============================================================
-   1. CANVAS — FALLING PETALS + CONFETTI BURST
+   CANVAS — PETALS + BURST
    ============================================================ */
 const canvas = $('petals');
 const ctx = canvas.getContext('2d');
 let DPR = Math.min(window.devicePixelRatio || 1, 2);
 let VW = window.innerWidth, VH = window.innerHeight;
-
 const PETAL_COLORS = ['#ffd3e0', '#ffe4ec', '#ffc2d4', '#fff0f4', '#ffdfe8', '#ffe9d6'];
 
 function resizeCanvas() {
-  VW = window.innerWidth;
-  VH = window.innerHeight;
+  VW = window.innerWidth; VH = window.innerHeight;
   canvas.width = Math.floor(VW * DPR);
   canvas.height = Math.floor(VH * DPR);
   canvas.style.width = VW + 'px';
@@ -884,10 +654,8 @@ const PETAL_COUNT = window.innerWidth < 640 ? 22 : 36;
 for (let i = 0; i < PETAL_COUNT; i++) petals.push(new Petal(true));
 
 const bursts = [];
-
 function burst(count = 90) {
-  const cx = VW / 2;
-  const cy = VH * 0.52;
+  const cx = VW / 2, cy = VH * 0.52;
   for (let i = 0; i < count; i++) {
     const angle = Math.random() * Math.PI * 2;
     const speed = 4 + Math.random() * 13;
@@ -899,33 +667,24 @@ function burst(count = 90) {
       size: 5 + Math.random() * 10,
       rot: Math.random() * Math.PI * 2,
       vr: (Math.random() - 0.5) * 0.24,
-      life: 1,
-      decay: 0.006 + Math.random() * 0.009,
+      life: 1, decay: 0.006 + Math.random() * 0.009,
       color: PETAL_COLORS[(Math.random() * PETAL_COLORS.length) | 0],
       golden: Math.random() < 0.22
     });
   }
 }
-
 function updateBursts() {
   for (let i = bursts.length - 1; i >= 0; i--) {
     const p = bursts[i];
-    p.vy += 0.22;
-    p.vx *= 0.985;
-    p.vy *= 0.988;
-    p.x += p.vx;
-    p.y += p.vy;
-    p.rot += p.vr;
-    p.life -= p.decay;
+    p.vy += 0.22; p.vx *= 0.985; p.vy *= 0.988;
+    p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= p.decay;
     if (p.life <= 0) bursts.splice(i, 1);
   }
 }
-
 function drawBursts() {
   for (const p of bursts) {
     ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rot);
+    ctx.translate(p.x, p.y); ctx.rotate(p.rot);
     ctx.globalAlpha = clamp(p.life, 0, 1);
     ctx.fillStyle = p.golden ? '#e8c76a' : p.color;
     ctx.beginPath();
@@ -934,26 +693,23 @@ function drawBursts() {
     ctx.restore();
   }
 }
-
-let rafId = null;
 function loop() {
   ctx.clearRect(0, 0, VW, VH);
   for (const p of petals) { p.update(); p.draw(); }
-  updateBursts();
-  drawBursts();
-  rafId = requestAnimationFrame(loop);
+  updateBursts(); drawBursts();
+  requestAnimationFrame(loop);
 }
 loop();
 
 /* ============================================================
-   2. PAPER PLANE FLIGHT
+   PAPER PLANE
    ============================================================ */
-const planeEl   = $('plane');
+const planeEl = $('plane');
 const trailPath = $('trailPath');
-const trailSvg  = $('trailSvg');
+const trailSvg = $('trailSvg');
 const titleBlock = $('titleBlock');
 const envelopeStage = $('envelopeStage');
-const envelopeDrop  = $('envelopeDrop');
+const envelopeDrop = $('envelopeDrop');
 const envelopeHolder = $('envelopeHolder');
 const envelopeEl = $('envelope');
 const envHint = $('envHint');
@@ -964,8 +720,7 @@ let flightStarted = false;
 let letterOpened = false;
 
 function getFlightPoints() {
-  const W = window.innerWidth;
-  const H = window.innerHeight;
+  const W = window.innerWidth, H = window.innerHeight;
   return {
     p0: { x: -0.16 * W, y: 0.80 * H },
     p1: { x:  0.30 * W, y: 0.84 * H },
@@ -973,7 +728,6 @@ function getFlightPoints() {
     p3: { x:  1.16 * W, y: 0.16 * H }
   };
 }
-
 function bezierAt(p0, p1, p2, p3, t) {
   const u = 1 - t;
   return {
@@ -981,7 +735,6 @@ function bezierAt(p0, p1, p2, p3, t) {
     y: u*u*u*p0.y + 3*u*u*t*p1.y + 3*u*t*t*p2.y + t*t*t*p3.y
   };
 }
-
 function bezierTangent(p0, p1, p2, p3, t) {
   const u = 1 - t;
   return {
@@ -993,40 +746,23 @@ function bezierTangent(p0, p1, p2, p3, t) {
 function startFlight() {
   if (flightStarted) return;
   flightStarted = true;
-
   const { p0, p1, p2, p3 } = getFlightPoints();
-
-  trailPath.setAttribute(
-    'd',
-    `M ${p0.x} ${p0.y} C ${p1.x} ${p1.y}, ${p2.x} ${p2.y}, ${p3.x} ${p3.y}`
-  );
+  trailPath.setAttribute('d', `M ${p0.x} ${p0.y} C ${p1.x} ${p1.y}, ${p2.x} ${p2.y}, ${p3.x} ${p3.y}`);
   trailPath.style.strokeDashoffset = 1;
-
   planeEl.style.opacity = '1';
-
   const DURATION = 4200;
   const startTime = performance.now();
-
   function frame(now) {
     const raw = clamp((now - startTime) / DURATION, 0, 1);
     const t = easeInOutSine(raw);
-
     const pos = bezierAt(p0, p1, p2, p3, t);
     const tan = bezierTangent(p0, p1, p2, p3, t);
     const angle = Math.atan2(tan.y, tan.x) * (180 / Math.PI);
-
-    planeEl.style.transform =
-      `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) rotate(${angle}deg)`;
-
+    planeEl.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) rotate(${angle}deg)`;
     trailPath.style.strokeDashoffset = (1 - t).toFixed(4);
-
-    if (raw > 0.86) {
-      planeEl.style.opacity = String(1 - (raw - 0.86) / 0.14);
-    }
-
-    if (raw < 1) {
-      requestAnimationFrame(frame);
-    } else {
+    if (raw > 0.86) planeEl.style.opacity = String(1 - (raw - 0.86) / 0.14);
+    if (raw < 1) requestAnimationFrame(frame);
+    else {
       planeEl.style.opacity = '0';
       setTimeout(() => { trailSvg.style.opacity = '0'; }, 900);
     }
@@ -1034,13 +770,9 @@ function startFlight() {
   requestAnimationFrame(frame);
 }
 
-/* ============================================================
-   3. ENVELOPE DELIVERY
-   ============================================================ */
 function dropEnvelope() {
   envelopeDrop.classList.add('fall');
   titleBlock.classList.add('dim');
-
   setTimeout(() => {
     envelopeStage.classList.add('landed');
     envelopeHolder.classList.add('idle');
@@ -1048,38 +780,24 @@ function dropEnvelope() {
   }, 2000);
 }
 
-/* ============================================================
-   4. OPEN THE LETTER
-   ============================================================ */
 function openLetter() {
   if (letterOpened) return;
   letterOpened = true;
-
   envelopeStage.classList.remove('landed');
   envHint.classList.remove('show');
-
   envelopeEl.classList.add('opening');
-
   setTimeout(() => envelopeEl.classList.add('open'), 480);
   setTimeout(() => envelopeEl.classList.add('lift'), 1150);
-
   setTimeout(() => {
     envelopeStage.classList.add('gone');
     letterStage.classList.add('show');
   }, 1780);
 }
-
 envelopeStage.addEventListener('click', openLetter);
 envelopeEl.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    openLetter();
-  }
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLetter(); }
 });
 
-/* ============================================================
-   5. FINALE
-   ============================================================ */
 $('ctaBtn').addEventListener('click', () => {
   letterStage.classList.remove('show');
   setTimeout(() => {
@@ -1091,17 +809,11 @@ $('ctaBtn').addEventListener('click', () => {
   }, 620);
 });
 
-/* ============================================================
-   6. TIMELINE
-   ============================================================ */
 window.addEventListener('load', () => {
   setTimeout(startFlight, 750);
   setTimeout(dropEnvelope, 2750);
 });
 
-/* ============================================================
-   7. RESIZE
-   ============================================================ */
 let resizeTimer = null;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
@@ -1112,34 +824,69 @@ window.addEventListener('resize', () => {
 });
 
 /* ============================================================
-   8. PERSONALIZATION — đọc nội dung từ URL hash (#d=...)
+   PRESET TEMPLATES & PERSONALIZATION
    ============================================================ */
-(function () {
-  if (location.hash.indexOf('#d=') !== 0) return;
+const HONORIFICS = { thay: 'Thầy', co: 'Cô', thayco: 'Thầy Cô' };
 
-  let data;
-  try {
-    const b64 = location.hash.slice(3).replace(/-/g, '+').replace(/_/g, '/');
-    const pad = '==='.slice((b64.length + 3) % 4);
-    const bin = atob(b64 + pad);
-    const bytes = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    data = JSON.parse(new TextDecoder().decode(bytes));
-  } catch (e) {
-    console.warn('Link không hợp lệ, dùng nội dung mặc định.', e);
-    return;
+const PRESET_TEMPLATES = {
+  formal: {
+    paragraphs: [
+      'Nhân dịp Ngày Nhà giáo Việt Nam 20/11, em xin gửi đến {honorific} những lời tri ân chân thành nhất.',
+      'Trong suốt những năm tháng ngồi trên ghế nhà trường, {honorific} đã không chỉ truyền đạt kiến thức mà còn dạy chúng em cách sống, cách làm người.',
+      'Có những bài giảng em đã quên, nhưng có những lời {honorific} dặn dò em vẫn mang theo đến tận hôm nay.',
+      'Kính chúc {honorific} thật nhiều sức khoẻ, hạnh phúc và tiếp tục là người truyền lửa cho bao thế hệ học trò.'
+    ],
+    signature: 'Học trò cũ',
+    signatureSub: 'Kính thư · 20.11'
+  },
+  warm: {
+    paragraphs: [
+      'Con nhớ những buổi sáng {honorific} đến lớp sớm hơn cả học trò, nhớ nét phấn trắng trên bảng, nhớ cả những lần {honorific} cười khi cả lớp trả lời đúng.',
+      'Ngày 20/11 này, con không về thăm {honorific} được, nhưng lòng con vẫn luôn hướng về lớp học cũ, nơi có {honorific} và những năm tháng đẹp nhất tuổi học trò.',
+      'Cảm ơn {honorific} vì đã kiên nhẫn với những đứa học trò nghịch ngợm, vì đã tin vào những ước mơ ngây ngô của chúng con.',
+      'Chúc {honorific} thật nhiều sức khoẻ và luôn giữ được nụ cười như ngày nào ạ.'
+    ],
+    signature: 'Học trò của {honorific}',
+    signatureSub: 'With love · 20.11'
+  },
+  short: {
+    paragraphs: [
+      'Nhân ngày 20/11, em xin chúc {honorific} thật nhiều sức khoẻ và hạnh phúc.',
+      'Cảm ơn {honorific} đã dành cả thanh xuân để dạy dỗ chúng em nên người. Những bài học của {honorific} là hành trang quý giá nhất em mang theo.',
+      'Chúc {honorific} một ngày lễ thật ấm áp và ý nghĩa ạ.'
+    ],
+    signature: 'Học trò của {honorific}',
+    signatureSub: '20.11'
+  },
+  light: {
+    paragraphs: [
+      '20/11 rồi {honorific} ơi! Con không gửi hoa, cũng không gửi quà — chỉ gửi lời chúc {honorific} thật nhiều sức khoẻ để tiếp tục "chiến đấu" với lũ học trò chúng con.',
+      'Con vẫn nhớ những lần {honorific} gọi lên bảng mà con không thuộc bài, nhớ cả những tràng cười của cả lớp khi {honorific} kể chuyện ngoài lề.',
+      'Cảm ơn {honorific} vì đã không bỏ cuộc với những đứa học trò lười như chúng con ạ.',
+      'Chúc {honorific} ngày 20/11 thật vui và tràn đầy yêu thương!'
+    ],
+    signature: 'Học trò cũ của {honorific}',
+    signatureSub: '20.11 · Chúc mừng!'
   }
+};
 
-  const get = id => document.getElementById(id);
+function decodeBase64Url(s) {
+  if (!s) return '';
+  const b64 = s.replace(/-/g, '+').replace(/_/g, '/');
+  const pad = '==='.slice((b64.length + 3) % 4);
+  const bin = atob(b64 + pad);
+  const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
 
+function applyData(data) {
+  if (!data) return;
   if (typeof data.to === 'string') {
-    const el = get('letterTo');
-    if (el) el.textContent = data.to;
+    const el = $('letterTo'); if (el) el.textContent = data.to;
   }
-
   if (Array.isArray(data.paragraphs)) {
     const paras = data.paragraphs.map(p => String(p || '').trim()).filter(Boolean);
-    const body = get('letterBody');
+    const body = $('letterBody');
     if (body && paras.length) {
       body.innerHTML = '';
       paras.forEach((text, i) => {
@@ -1150,22 +897,50 @@ window.addEventListener('resize', () => {
       });
     }
   }
-
   if (typeof data.signature === 'string') {
-    const el = get('signatureName');
-    if (el) el.textContent = data.signature;
+    const el = $('signatureName'); if (el) el.textContent = data.signature;
   }
-
   if (typeof data.signatureSub === 'string') {
-    const el = get('signatureSub');
-    if (el) el.textContent = data.signatureSub;
+    const el = $('signatureSub'); if (el) el.textContent = data.signatureSub;
   }
-
   if (typeof data.finale === 'string') {
-    const el = get('finaleSub');
-    if (el) el.textContent = data.finale;
+    const el = $('finaleSub'); if (el) el.textContent = data.finale;
   }
+}
+
+(function () {
+  const hash = location.hash.slice(1);
+  if (!hash) return;
+  const params = new URLSearchParams(hash);
+  let data = null;
+
+  if (params.has('t')) {
+    const templateId = params.get('t');
+    const honorificId = params.get('h') || 'thayco';
+    let name = '';
+    try { name = decodeBase64Url(params.get('n') || ''); } catch {}
+    const honorific = HONORIFICS[honorificId] || HONORIFICS.thayco;
+    const template = PRESET_TEMPLATES[templateId];
+    if (!template) return;
+    data = {
+      to: name ? `Kính gửi ${honorific} ${name},` : `Kính gửi ${honorific},`,
+      paragraphs: template.paragraphs.map(p => p.replace(/\{honorific\}/g, honorific)),
+      signature: template.signature.replace(/\{honorific\}/g, honorific),
+      signatureSub: template.signatureSub
+    };
+  } else if (params.has('z')) {
+    if (typeof LZString === 'undefined') {
+      console.warn('LZ-string chưa load.');
+      return;
+    }
+    try { data = JSON.parse(LZString.decompressFromEncodedURIComponent(params.get('z'))); } catch {}
+  } else if (params.has('d')) {
+    try { data = JSON.parse(decodeBase64Url(params.get('d'))); } catch {}
+  }
+  if (data) applyData(data);
 })();
 </script>
+<!-- LZ-string cho custom mode -->
+<script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
 </body>
 </html>
