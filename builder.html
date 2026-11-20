@@ -6,7 +6,7 @@
 <title>Letter Builder — Tạo link thư tri ân</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#33302a; --ink-soft:#5c564c;
@@ -31,55 +31,34 @@ body{
 h1{margin:0;font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(28px,5vw,46px);letter-spacing:-.015em;color:#2f2a22;}
 h1 em{font-style:italic;color:var(--accent);font-weight:500;}
 .sub{margin:10px 0 0;font-size:clamp(13px,1.7vw,15px);color:var(--ink-soft);font-weight:300;}
-
 .layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,3vw,32px);align-items:start;}
 @media(max-width:860px){.layout{grid-template-columns:1fr;}}
 .card{background:var(--paper);border-radius:12px;padding:clamp(20px,3vw,32px);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 20px 40px -20px rgba(80,60,40,.18),0 4px 12px rgba(80,60,40,.06);border:1px solid rgba(160,140,110,.12);}
-
-.mode-switch{display:flex;gap:8px;margin-bottom:20px;padding:6px;background:rgba(240,230,210,.5);border-radius:10px;}
-.mode-btn{flex:1;padding:11px 14px;border:none;background:transparent;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;color:var(--ink-soft);transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;}
-.mode-btn.active{background:#fff;color:var(--accent);box-shadow:0 2px 8px rgba(120,60,40,.12);}
-.badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;background:rgba(193,85,63,.15);color:var(--accent);letter-spacing:.05em;}
-.badge-light{background:rgba(90,70,50,.1);color:var(--ink-soft);}
-.mode-btn.active .badge{background:rgba(193,85,63,.2);}
-.mode-btn.active .badge-light{background:rgba(90,70,50,.15);}
-
 .field{margin-bottom:20px;}
 .field:last-child{margin-bottom:0;}
 label.lbl{display:block;font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(90,70,50,.75);margin-bottom:8px;}
-input[type="text"],textarea,select{width:100%;font-family:inherit;font-size:14.5px;line-height:1.6;color:var(--ink);background:#fffefa;border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;transition:border-color .2s,box-shadow .2s,background .2s;resize:vertical;appearance:none;}
-select{padding-right:36px;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235c564c' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:12px;}
-input[type="text"]:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent);background:#fff;box-shadow:0 0 0 3px rgba(193,85,63,.12);}
+input[type="text"],textarea{width:100%;font-family:inherit;font-size:14.5px;line-height:1.6;color:var(--ink);background:#fffefa;border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;transition:border-color .2s,box-shadow .2s,background .2s;resize:vertical;}
+input[type="text"]:focus,textarea:focus{outline:none;border-color:var(--accent);background:#fff;box-shadow:0 0 0 3px rgba(193,85,63,.12);}
 textarea{min-height:80px;}
-.row{display:grid;grid-template-columns:140px 1fr;gap:10px;}
-@media(max-width:520px){.row{grid-template-columns:1fr;}}
-
 .para-row{position:relative;margin-bottom:10px;display:flex;gap:8px;align-items:flex-start;}
 .para-row textarea{flex:1;min-height:70px;}
 .para-remove{flex:none;width:34px;height:34px;margin-top:4px;border:1.5px solid var(--border);background:transparent;border-radius:8px;cursor:pointer;color:var(--ink-soft);font-size:18px;line-height:1;transition:all .2s;}
 .para-remove:hover{background:#fff0ec;border-color:var(--accent);color:var(--accent);}
 .add-para{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border:1.5px dashed rgba(160,140,110,.5);background:transparent;border-radius:8px;cursor:pointer;color:var(--ink-soft);font-family:inherit;font-size:13px;font-weight:500;margin-top:6px;transition:all .2s;}
 .add-para:hover{border-color:var(--accent);color:var(--accent);background:rgba(255,240,236,.5);}
-
-.preview{background:#fffefa;border:1.5px solid var(--border);border-radius:8px;padding:18px 20px;font-size:13.5px;line-height:1.8;color:var(--ink-soft);max-height:340px;overflow-y:auto;}
-.preview-to{font-family:'Playfair Display',serif;font-style:italic;color:#2f4358;margin:0 0 14px;font-size:16px;}
-.preview p{margin:0 0 10px;}
-.preview-sig{text-align:right;font-family:'Dancing Script',cursive;font-size:22px;font-weight:600;color:var(--accent);margin-top:18px!important;}
-
 .actions-card{position:sticky;top:20px;}
 @media(max-width:860px){.actions-card{position:static;}}
 .btn-primary{display:block;width:100%;padding:15px;border:none;border-radius:10px;background:linear-gradient(135deg,#d9694e,#b8452f);color:#fff8f2;font-family:inherit;font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;box-shadow:0 12px 22px -10px rgba(180,60,40,.6);transition:transform .25s cubic-bezier(.34,1.5,.64,1),box-shadow .25s,filter .25s;}
 .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.04);box-shadow:0 16px 28px -10px rgba(180,60,40,.7);}
 .result{margin-top:20px;padding-top:20px;border-top:1px dashed var(--border);animation:fadeUp .5s ease both;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-.link-out{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px!important;color:var(--ink-soft)!important;background:#fbf6e9!important;word-break:break-all;}
+.link-out{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px!important;color:var(--ink-soft)!important;background:#fbf6e9!important;}
 .result-actions{display:flex;gap:8px;margin-top:12px;}
 .btn-secondary{flex:1;padding:11px 14px;border:1.5px solid var(--border);background:#fffefa;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;color:var(--ink);text-decoration:none;text-align:center;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:5px;}
 .btn-secondary:hover{border-color:var(--accent);color:var(--accent);background:#fff5f1;}
 .btn-secondary.copied{border-color:#4a8a4a;color:#4a8a4a;background:#f0f8f0;}
 .link-meta{margin-top:12px;font-size:12px;color:var(--ink-soft);line-height:1.6;}
 .link-meta.warn{color:#b87333;}
-.link-meta.good{color:#4a8a4a;}
 .tip{margin-top:20px;padding:14px 16px;border-radius:8px;background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.22);font-size:12.5px;line-height:1.7;color:#6b5a30;}
 .tip code{background:rgba(255,255,255,.6);padding:1px 5px;border-radius:3px;font-size:12px;}
 </style>
@@ -93,73 +72,37 @@ textarea{min-height:80px;}
   </header>
 
   <div class="layout">
-    <div class="card">
-      <div class="mode-switch">
-        <button type="button" class="mode-btn active" data-mode="preset">
-          Mẫu có sẵn <span class="badge">Link ngắn</span>
-        </button>
-        <button type="button" class="mode-btn" data-mode="custom">
-          Tự soạn <span class="badge badge-light">Link dài hơn</span>
-        </button>
+    <form class="card" onsubmit="return false;">
+      <div class="field">
+        <label class="lbl" for="inpTo">Người nhận</label>
+        <input type="text" id="inpTo" value="Kính gửi Thầy, Cô," autocomplete="off">
       </div>
 
-      <!-- ============ PRESET PANEL ============ -->
-      <div id="presetPanel">
-        <div class="field">
-          <label class="lbl" for="inpHonorific">Xưng hô</label>
-          <select id="inpHonorific">
-            <option value="thay">Thầy</option>
-            <option value="co">Cô</option>
-            <option value="thayco" selected>Thầy Cô</option>
-          </select>
-        </div>
-        <div class="field">
-          <label class="lbl" for="inpPresetName">Tên người nhận (không bắt buộc)</label>
-          <input type="text" id="inpPresetName" placeholder="Ví dụ: Nguyễn Văn An" autocomplete="off">
-        </div>
-        <div class="field">
-          <label class="lbl" for="inpTemplate">Mẫu thư</label>
-          <select id="inpTemplate">
-            <option value="formal">Trang trọng</option>
-            <option value="warm" selected>Ấm áp</option>
-            <option value="short">Ngắn gọn</option>
-            <option value="light">Hài hước nhẹ</option>
-          </select>
-        </div>
-        <div class="field">
-          <label class="lbl">Xem trước</label>
-          <div class="preview" id="presetPreview"></div>
-        </div>
+      <div class="field">
+        <label class="lbl">Các đoạn thư</label>
+        <div id="parasList"></div>
+        <button type="button" class="add-para" id="addPara">+ Thêm đoạn</button>
       </div>
 
-      <!-- ============ CUSTOM PANEL ============ -->
-      <div id="customPanel" hidden>
-        <div class="field">
-          <label class="lbl" for="inpTo">Người nhận</label>
-          <input type="text" id="inpTo" value="Kính gửi Thầy, Cô," autocomplete="off">
-        </div>
-        <div class="field">
-          <label class="lbl">Các đoạn thư</label>
-          <div id="parasList"></div>
-          <button type="button" class="add-para" id="addPara">+ Thêm đoạn</button>
-        </div>
-        <div class="field">
-          <label class="lbl" for="inpSign">Chữ ký</label>
-          <input type="text" id="inpSign" value="Học trò của Thầy Cô" autocomplete="off">
-        </div>
-        <div class="field">
-          <label class="lbl" for="inpSignSub">Dòng phụ dưới chữ ký</label>
-          <input type="text" id="inpSignSub" value="With love · 20.11" autocomplete="off">
-        </div>
-        <div class="field">
-          <label class="lbl" for="inpFinale">Lời nhắn cuối</label>
-          <textarea id="inpFinale" rows="3">Cảm ơn Thầy Cô — những người đã dạy chúng em cách cất cánh, và luôn là bầu trời để chúng em quay về.</textarea>
-        </div>
+      <div class="field">
+        <label class="lbl" for="inpSign">Chữ ký</label>
+        <input type="text" id="inpSign" value="Học trò của Thầy Cô" autocomplete="off">
       </div>
-    </div>
+
+      <div class="field">
+        <label class="lbl" for="inpSignSub">Dòng phụ dưới chữ ký</label>
+        <input type="text" id="inpSignSub" value="With love · 20.11" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label class="lbl" for="inpFinale">Lời nhắn cuối</label>
+        <textarea id="inpFinale" rows="3">Cảm ơn Thầy Cô — những người đã dạy chúng em cách cất cánh, và luôn là bầu trời để chúng em quay về.</textarea>
+      </div>
+    </form>
 
     <aside class="card actions-card">
       <button type="button" class="btn-primary" id="btnGen">Tạo link chia sẻ</button>
+
       <div class="result" id="result" hidden>
         <label class="lbl" for="linkOut">Link chia sẻ</label>
         <input type="text" class="link-out" id="linkOut" readonly onclick="this.select()">
@@ -171,70 +114,58 @@ textarea{min-height:80px;}
       </div>
 
       <div class="tip">
-        <strong>Mẹo:</strong> Chế độ <strong>Mẫu có sẵn</strong> cho link rất ngắn (~50–90 ký tự) — chỉ cần chọn mẫu và nhập tên. Chế độ <strong>Tự soạn</strong> nén toàn bộ thư vào link bằng LZ-string, vẫn giữ được ~50% so với cách cũ.
+        <strong>Mẹo:</strong> Link chứa toàn bộ nội dung thư — không cần server, không cần database. Chỉ cần upload 2 file <code>index.html</code> (thư) và <code>builder.html</code> (trang này) lên GitHub Pages là dùng được.
       </div>
     </aside>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
 <script>
-/* Nếu đổi tên file thư, sửa ở đây: */
+/* Nếu bạn đổi tên file thư, sửa ở đây: */
 const LETTER_FILENAME = 'index.html';
 
-const HONORIFICS = { thay: 'Thầy', co: 'Cô', thayco: 'Thầy Cô' };
+const DEFAULT_PARAS = [
+  "Có những chuyến bay không cần đến sân bay. Chỉ cần một tờ giấy, vài nếp gấp, và một niềm tin rằng lời cảm ơn rồi sẽ tìm được đúng người để trao.",
+  "Chiếc máy bay giấy nhỏ này mang theo lời tri ân của chúng em — những đứa học trò từng ngồi dưới mái trường, từng run tay khi bị gọi lên bảng, từng lén nhìn thầy cô viết bảng mỗi sớm mai.",
+  "Thầy cô đã dạy chúng em đọc một con chữ, viết một ước mơ, và hơn hết — dạy chúng em cách trở thành một người tử tế. Những điều ấy không nằm trong sách giáo khoa, nhưng lại là hành trang lớn nhất chúng em mang theo suốt cuộc đời.",
+  "Ngày 20/11 này, chúng em không gửi hoa, cũng chẳng gửi quà. Chúng em chỉ gửi một chuyến bay nhỏ xíu chở đầy lời cảm ơn, và một lời hẹn: chúng em sẽ bay thật xa, nhưng sẽ không bao giờ quên nơi mình đã học cách cất cánh.",
+  "Kính chúc Thầy Cô thật nhiều sức khoẻ, bình an, và luôn giữ được ngọn lửa của người gieo chữ."
+];
 
-const PRESET_TEMPLATES = {
-  formal: {
-    label: 'Trang trọng',
-    paragraphs: [
-      'Nhân dịp Ngày Nhà giáo Việt Nam 20/11, em xin gửi đến {honorific} những lời tri ân chân thành nhất.',
-      'Trong suốt những năm tháng ngồi trên ghế nhà trường, {honorific} đã không chỉ truyền đạt kiến thức mà còn dạy chúng em cách sống, cách làm người.',
-      'Có những bài giảng em đã quên, nhưng có những lời {honorific} dặn dò em vẫn mang theo đến tận hôm nay.',
-      'Kính chúc {honorific} thật nhiều sức khoẻ, hạnh phúc và tiếp tục là người truyền lửa cho bao thế hệ học trò.'
-    ],
-    signature: 'Học trò cũ',
-    signatureSub: 'Kính thư · 20.11'
-  },
-  warm: {
-    label: 'Ấm áp',
-    paragraphs: [
-      'Con nhớ những buổi sáng {honorific} đến lớp sớm hơn cả học trò, nhớ nét phấn trắng trên bảng, nhớ cả những lần {honorific} cười khi cả lớp trả lời đúng.',
-      'Ngày 20/11 này, con không về thăm {honorific} được, nhưng lòng con vẫn luôn hướng về lớp học cũ, nơi có {honorific} và những năm tháng đẹp nhất tuổi học trò.',
-      'Cảm ơn {honorific} vì đã kiên nhẫn với những đứa học trò nghịch ngợm, vì đã tin vào những ước mơ ngây ngô của chúng con.',
-      'Chúc {honorific} thật nhiều sức khoẻ và luôn giữ được nụ cười như ngày nào ạ.'
-    ],
-    signature: 'Học trò của {honorific}',
-    signatureSub: 'With love · 20.11'
-  },
-  short: {
-    label: 'Ngắn gọn',
-    paragraphs: [
-      'Nhân ngày 20/11, em xin chúc {honorific} thật nhiều sức khoẻ và hạnh phúc.',
-      'Cảm ơn {honorific} đã dành cả thanh xuân để dạy dỗ chúng em nên người. Những bài học của {honorific} là hành trang quý giá nhất em mang theo.',
-      'Chúc {honorific} một ngày lễ thật ấm áp và ý nghĩa ạ.'
-    ],
-    signature: 'Học trò của {honorific}',
-    signatureSub: '20.11'
-  },
-  light: {
-    label: 'Hài hước nhẹ',
-    paragraphs: [
-      '20/11 rồi {honorific} ơi! Con không gửi hoa, cũng không gửi quà — chỉ gửi lời chúc {honorific} thật nhiều sức khoẻ để tiếp tục "chiến đấu" với lũ học trò chúng con.',
-      'Con vẫn nhớ những lần {honorific} gọi lên bảng mà con không thuộc bài, nhớ cả những tràng cười của cả lớp khi {honorific} kể chuyện ngoài lề.',
-      'Cảm ơn {honorific} vì đã không bỏ cuộc với những đứa học trò lười như chúng con ạ.',
-      'Chúc {honorific} ngày 20/11 thật vui và tràn đầy yêu thương!'
-    ],
-    signature: 'Học trò cũ của {honorific}',
-    signatureSub: '20.11 · Chúc mừng!'
-  }
-};
+const parasList = document.getElementById('parasList');
 
-const DEFAULT_PARAS = PRESET_TEMPLATES.warm.paragraphs.map(p => p.replace(/\{honorific\}/g, 'Thầy Cô'));
+function makeParaRow(value = '') {
+  const row = document.createElement('div');
+  row.className = 'para-row';
 
-/* ---------- Utils ---------- */
-function encodeBase64Url(s) {
-  const bytes = new TextEncoder().encode(s);
+  const ta = document.createElement('textarea');
+  ta.rows = 3;
+  ta.value = value;
+  ta.placeholder = 'Nhập nội dung đoạn thư...';
+
+  const rm = document.createElement('button');
+  rm.type = 'button';
+  rm.className = 'para-remove';
+  rm.title = 'Xoá đoạn này';
+  rm.textContent = '×';
+  rm.addEventListener('click', () => row.remove());
+
+  row.appendChild(ta);
+  row.appendChild(rm);
+  parasList.appendChild(row);
+  return row;
+}
+
+DEFAULT_PARAS.forEach(p => makeParaRow(p));
+
+document.getElementById('addPara').addEventListener('click', () => {
+  const row = makeParaRow('');
+  row.querySelector('textarea').focus();
+});
+
+function encodeData(obj) {
+  const json = JSON.stringify(obj);
+  const bytes = new TextEncoder().encode(json);
   let bin = '';
   for (const b of bytes) bin += String.fromCharCode(b);
   return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -248,88 +179,6 @@ function getLetterUrl() {
   return url.href;
 }
 
-/* ---------- Mode switching ---------- */
-let currentMode = 'preset';
-document.querySelectorAll('.mode-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const mode = btn.dataset.mode;
-    if (mode === currentMode) return;
-    currentMode = mode;
-    document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b === btn));
-    document.getElementById('presetPanel').hidden = mode !== 'preset';
-    document.getElementById('customPanel').hidden = mode !== 'custom';
-    document.getElementById('result').hidden = true;
-  });
-});
-
-/* ---------- Preset panel ---------- */
-const parasList = document.getElementById('parasList');
-
-function makeParaRow(value = '') {
-  const row = document.createElement('div');
-  row.className = 'para-row';
-  const ta = document.createElement('textarea');
-  ta.rows = 3;
-  ta.value = value;
-  ta.placeholder = 'Nhập nội dung đoạn thư...';
-  const rm = document.createElement('button');
-  rm.type = 'button';
-  rm.className = 'para-remove';
-  rm.title = 'Xoá đoạn này';
-  rm.textContent = '×';
-  rm.addEventListener('click', () => row.remove());
-  row.appendChild(ta);
-  row.appendChild(rm);
-  parasList.appendChild(row);
-  return row;
-}
-DEFAULT_PARAS.forEach(p => makeParaRow(p));
-document.getElementById('addPara').addEventListener('click', () => {
-  const row = makeParaRow('');
-  row.querySelector('textarea').focus();
-});
-
-function getPresetValues() {
-  return {
-    honorificId: document.getElementById('inpHonorific').value,
-    name: document.getElementById('inpPresetName').value.trim(),
-    templateId: document.getElementById('inpTemplate').value
-  };
-}
-
-function renderPresetPreview() {
-  const { honorificId, name, templateId } = getPresetValues();
-  const honorific = HONORIFICS[honorificId] || HONORIFICS.thayco;
-  const template = PRESET_TEMPLATES[templateId];
-  if (!template) return;
-
-  const to = name ? `Kính gửi ${honorific} ${name},` : `Kính gửi ${honorific},`;
-  const paras = template.paragraphs.map(p => p.replace(/\{honorific\}/g, honorific));
-  const sig = template.signature.replace(/\{honorific\}/g, honorific);
-
-  const el = document.getElementById('presetPreview');
-  el.innerHTML = '';
-  const toEl = document.createElement('p');
-  toEl.className = 'preview-to';
-  toEl.textContent = to;
-  el.appendChild(toEl);
-  paras.forEach(text => {
-    const p = document.createElement('p');
-    p.textContent = text;
-    el.appendChild(p);
-  });
-  const sigEl = document.createElement('p');
-  sigEl.className = 'preview-sig';
-  sigEl.textContent = sig;
-  el.appendChild(sigEl);
-}
-
-document.getElementById('inpHonorific').addEventListener('change', renderPresetPreview);
-document.getElementById('inpPresetName').addEventListener('input', renderPresetPreview);
-document.getElementById('inpTemplate').addEventListener('change', renderPresetPreview);
-renderPresetPreview();
-
-/* ---------- URL generation ---------- */
 const btnGen = document.getElementById('btnGen');
 const result = document.getElementById('result');
 const linkOut = document.getElementById('linkOut');
@@ -337,23 +186,16 @@ const btnCopy = document.getElementById('btnCopy');
 const btnPreview = document.getElementById('btnPreview');
 const linkMeta = document.getElementById('linkMeta');
 
-function buildPresetUrl() {
-  const { honorificId, name, templateId } = getPresetValues();
-  const params = new URLSearchParams();
-  params.set('t', templateId);
-  params.set('h', honorificId);
-  if (name) params.set('n', encodeBase64Url(name));
-  return getLetterUrl() + '#' + params.toString();
-}
-
-function buildCustomUrl() {
+btnGen.addEventListener('click', () => {
   const paragraphs = Array.from(parasList.querySelectorAll('textarea'))
     .map(ta => ta.value.trim())
     .filter(Boolean);
+
   if (!paragraphs.length) {
     alert('Vui lòng nhập ít nhất một đoạn thư.');
-    return null;
+    return;
   }
+
   const data = {
     to: document.getElementById('inpTo').value.trim(),
     paragraphs,
@@ -361,38 +203,29 @@ function buildCustomUrl() {
     signatureSub: document.getElementById('inpSignSub').value.trim(),
     finale: document.getElementById('inpFinale').value.trim()
   };
-  let hashPart;
-  if (typeof LZString !== 'undefined') {
-    hashPart = 'z=' + LZString.compressToEncodedURIComponent(JSON.stringify(data));
-  } else {
-    hashPart = 'd=' + encodeBase64Url(JSON.stringify(data));
-  }
-  return getLetterUrl() + '#' + hashPart;
-}
 
-btnGen.addEventListener('click', () => {
-  const url = currentMode === 'preset' ? buildPresetUrl() : buildCustomUrl();
-  if (!url) return;
+  const url = getLetterUrl() + '#d=' + encodeData(data);
   linkOut.value = url;
   btnPreview.href = url;
   result.hidden = false;
 
   if (url.length > 1800) {
     linkMeta.className = 'link-meta warn';
-    linkMeta.textContent = `⚠ Link dài (${url.length} ký tự). Cân nhắc dùng chế độ Mẫu có sẵn.`;
-  } else if (url.length < 200) {
-    linkMeta.className = 'link-meta good';
-    linkMeta.textContent = `✓ Link rất ngắn (${url.length} ký tự). Sẵn sàng chia sẻ.`;
+    linkMeta.textContent = `⚠ Link khá dài (${url.length} ký tự). Một số ứng dụng chat/email có thể cắt bớt — cân nhắc rút gọn nội dung.`;
   } else {
     linkMeta.className = 'link-meta';
-    linkMeta.textContent = `✓ Độ dài link: ${url.length} ký tự.`;
+    linkMeta.textContent = `✓ Độ dài link: ${url.length} ký tự. Sẵn sàng chia sẻ.`;
   }
 });
 
 btnCopy.addEventListener('click', async () => {
   if (!linkOut.value) return;
-  try { await navigator.clipboard.writeText(linkOut.value); }
-  catch { linkOut.select(); document.execCommand('copy'); }
+  try {
+    await navigator.clipboard.writeText(linkOut.value);
+  } catch {
+    linkOut.select();
+    document.execCommand('copy');
+  }
   const orig = btnCopy.textContent;
   btnCopy.textContent = '✓ Đã chép';
   btnCopy.classList.add('copied');
