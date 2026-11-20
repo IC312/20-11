@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Letter For Teachers — Chuyến bay tri ân</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & TOKENS
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+
+:root{
+  --ink:        #33302a;
+  --ink-soft:   #5c564c;
+  --paper:      #fffdf6;
+  --paper-2:    #f7efdd;
+  --accent:     #c1553f;
+  --accent-2:   #e0795f;
+  --gold:       #c9a227;
+  --sky-1:      #6fb6e0;
+  --sky-2:      #9ed2ec;
+  --sky-3:      #cbe7f4;
+  --sky-4:      #f2ecdf;
+  --sky-5:      #fbeed6;
+}
+
+body{
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  background: var(--sky-3);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================================================
+   SKY BACKGROUND
+   ============================================================ */
+.sky{
+  position: fixed; inset: 0; z-index: 0;
+  background: linear-gradient(175deg,
+      var(--sky-1) 0%,
+      var(--sky-2) 26%,
+      var(--sky-3) 52%,
+      var(--sky-4) 78%,
+      var(--sky-5) 100%);
+  overflow: hidden;
+}
+
+.sun{
+  position: absolute;
+  top: -8vmin; right: 4vmin;
+  width: 42vmin; height: 42vmin;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%,
+      rgba(255,252,235,1) 0%,
+      rgba(255,246,214,.92) 22%,
+      rgba(255,240,200,.45) 45%,
+      rgba(255,236,190,0) 72%);
+  filter: blur(2px);
+  animation: sunPulse 9s ease-in-out infinite;
+}
+@keyframes sunPulse{
+  0%,100%{ transform: scale(1);   opacity: .95; }
+  50%    { transform: scale(1.06); opacity: 1;  }
+}
+.sun-core{
+  position: absolute;
+  top: 3vmin; right: 15vmin;
+  width: 14vmin; height: 14vmin;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #fffef8, #fff3cf 60%, #ffe9ae 100%);
+  box-shadow: 0 0 12vmin 4vmin rgba(255, 240, 190, .55);
+  animation: sunPulse 9s ease-in-out infinite;
+}
+
+.rays{
+  position: absolute;
+  top: -30vmin; right: -20vmin;
+  width: 110vmin; height: 110vmin;
+  background: conic-gradient(from 200deg,
+      rgba(255,255,255,0) 0deg,
+      rgba(255,255,255,.18) 6deg,
+      rgba(255,255,255,0) 13deg,
+      rgba(255,255,255,0) 26deg,
+      rgba(255,255,255,.14) 32deg,
+      rgba(255,255,255,0) 40deg,
+      rgba(255,255,255,0) 55deg,
+      rgba(255,255,255,.16) 61deg,
+      rgba(255,255,255,0) 70deg,
+      rgba(255,255,255,0) 360deg);
+  filter: blur(14px);
+  opacity: .85;
+  animation: rayDrift 26s linear infinite;
+  pointer-events: none;
+}
+@keyframes rayDrift{ to{ transform: rotate(360deg); } }
+
+.cloud{
+  position: absolute;
+  background: rgba(255,255,255,.92);
+  border-radius: 999px;
+  filter: blur(16px);
+  opacity: .82;
+  will-change: transform;
+}
+.cloud::before, .cloud::after{
+  content:'';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+.cloud::before{ width: 62%; height: 175%; top: -78%; left: 12%; }
+.cloud::after { width: 44%; height: 140%; top: -56%; right: 14%; }
+
+.c1{ width: 44vmin; height: 11vmin; top: 14%;  left: -50vmin; animation: drift 68s linear infinite; }
+.c2{ width: 30vmin; height: 8vmin;  top: 30%;  left: -50vmin; opacity:.65; animation: drift 92s linear infinite 8s; }
+.c3{ width: 58vmin; height: 14vmin; top: 52%;  left: -70vmin; opacity:.55; animation: drift 110s linear infinite 22s; }
+.c4{ width: 24vmin; height: 7vmin;  top: 68%;  left: -40vmin; opacity:.5;  animation: drift 76s linear infinite 40s; }
+.c5{ width: 36vmin; height: 10vmin; top: 8%;   left: -50vmin; opacity:.7;  animation: drift 88s linear infinite 55s; }
+
+@keyframes drift{
+  from{ transform: translateX(0); }
+  to  { transform: translateX(calc(100vw + 90vmin)); }
+}
+
+.haze{
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 118%, rgba(255,247,228,.9), rgba(255,247,228,0) 62%),
+    radial-gradient(ellipse 90% 70% at 50% 40%, rgba(255,255,255,0) 45%, rgba(120,160,190,.22) 100%);
+  pointer-events: none;
+}
+
+#petals{
+  position: fixed; inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ============================================================
+   TRAIL + PAPER PLANE
+   ============================================================ */
+.trail-svg{
+  position: fixed; inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity 1.4s ease;
+}
+#trailPath{
+  fill: none;
+  stroke: rgba(255,255,255,.85);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.9));
+}
+
+.plane{
+  position: fixed;
+  top: 0; left: 0;
+  width: 74px; height: 74px;
+  z-index: 4;
+  opacity: 0;
+  will-change: transform, opacity;
+  pointer-events: none;
+  transition: opacity .9s ease;
+  filter: drop-shadow(0 10px 14px rgba(60,90,120,.28));
+}
+.plane svg{ width: 100%; height: 100%; display: block; }
+
+/* ============================================================
+   TITLE
+   ============================================================ */
+.title-block{
+  position: fixed;
+  top: clamp(38px, 11vh, 130px);
+  left: 0; right: 0;
+  z-index: 6;
+  text-align: center;
+  padding: 0 22px;
+  pointer-events: none;
+  transition: opacity .9s ease, transform .9s ease;
+}
+.title-block.dim{
+  opacity: .0;
+  transform: translateY(-14px);
+}
+.kicker{
+  margin: 0 0 14px;
+  font-size: clamp(10px, 1.35vw, 12.5px);
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(45, 70, 92, .68);
+}
+.title-block h1{
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: clamp(30px, 6.2vw, 68px);
+  line-height: 1.06;
+  letter-spacing: -.015em;
+  color: #2b4155;
+  text-shadow: 0 2px 24px rgba(255,255,255,.55);
+}
+.title-block h1 em{
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+}
+.subtitle{
+  margin: 16px 0 0;
+  font-size: clamp(12px, 1.8vw, 15px);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: rgba(45, 70, 92, .62);
+}
+
+/* ============================================================
+   ENVELOPE
+   ============================================================ */
+.envelope-stage{
+  position: fixed; inset: 0;
+  z-index: 7;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transition: opacity .7s ease, transform .7s cubic-bezier(.4,0,.2,1), filter .7s ease;
+}
+.envelope-stage.landed{ pointer-events: auto; cursor: pointer; }
+.envelope-stage.gone{
+  opacity: 0;
+  transform: scale(.86);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.envelope-drop{
+  transform: translateY(-115vh) rotate(-20deg);
+  opacity: 0;
+}
+.envelope-drop.fall{
+  animation: envelopeDrop 2.1s cubic-bezier(.35,.02,.3,1) forwards;
+}
+@keyframes envelopeDrop{
+  0%   { transform: translateY(-115vh) rotate(-22deg); opacity: 0; }
+  8%   { opacity: 1; }
+  55%  { transform: translateY(14px) rotate(5deg);  opacity: 1; }
+  70%  { transform: translateY(-14px) rotate(-3.5deg); }
+  84%  { transform: translateY(6px) rotate(1.6deg); }
+  94%  { transform: translateY(-3px) rotate(-.7deg); }
+  100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+}
+
+.envelope-holder{
+  position: relative;
+  transform: translateY(-2vh);
+}
+.envelope-holder.idle{
+  animation: envFloat 5.5s ease-in-out infinite;
+}
+@keyframes envFloat{
+  0%,100%{ transform: translateY(-2vh); }
+  50%    { transform: translateY(calc(-2vh - 14px)); }
+}
+
+.envelope{
+  position: relative;
+  width: min(370px, 80vw);
+  aspect-ratio: 370 / 246;
+  transform-style: preserve-3d;
+  perspective: 1400px;
+  filter: drop-shadow(0 30px 44px rgba(48, 70, 96, .28));
+}
+
+.env-back{
+  position: absolute; inset: 0;
+  border-radius: 10px;
+  background: linear-gradient(160deg, #fdf8ea 0%, #f3e8d1 100%);
+}
+
+.env-letter{
+  position: absolute;
+  left: 6%; top: 7%;
+  width: 88%; height: 86%;
+  background: linear-gradient(180deg, #fffefa, #fdf9ee);
+  border-radius: 5px;
+  box-shadow: 0 3px 14px rgba(80, 70, 50, .18);
+  z-index: 1;
+  transition: transform .85s cubic-bezier(.34,1.28,.64,1);
+  overflow: hidden;
+}
+.env-letter::before{
+  content:'';
+  position:absolute; inset: 18% 14% auto 14%;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, rgba(160,150,130,.35) 0 26px, transparent 26px 40px);
+  border-radius: 3px;
+}
+.env-letter::after{
+  content:'';
+  position:absolute; inset: 34% 14% auto 14%;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, rgba(160,150,130,.28) 0 20px, transparent 20px 40px);
+  border-radius: 3px;
+}
+.envelope.lift .env-letter{
+  transform: translateY(-46%) rotate(-1.5deg);
+}
+
+.env-pocket{
+  position: absolute; inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.env-pocket::before{
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(120deg, #f6ecd6, #eee0c4);
+  clip-path: polygon(0 0, 50% 50%, 0 100%);
+  border-radius: 10px 0 0 10px;
+}
+.env-pocket::after{
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(240deg, #f2e6ce, #e9dabe);
+  clip-path: polygon(100% 0, 50% 50%, 100% 100%);
+  border-radius: 0 10px 10px 0;
+}
+.env-bottom{
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, #faf1dd, #f1e5ca);
+  clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+  border-radius: 0 0 10px 10px;
+  z-index: 4;
+}
+
+.env-flap{
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 53%;
+  background: linear-gradient(180deg, #fbf3e0, #efe1c3);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-radius: 10px 10px 0 0;
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition: transform .85s cubic-bezier(.62,.02,.32,1);
+  z-index: 6;
+}
+.envelope.open .env-flap{
+  transform: rotateX(-176deg);
+}
+
+/* Ribbon — flush với mép phong thư */
+.ribbon-v, .ribbon-h{
+  position: absolute;
+  z-index: 8;
+  background: linear-gradient(90deg, #a83c28, #d9694e 45%, #a83c28);
+  box-shadow: 0 1px 4px rgba(90,30,20,.25);
+  transition: transform .55s cubic-bezier(.5,0,.9,.4), opacity .5s ease;
+}
+.ribbon-v{
+  left: 50%; top: 0; bottom: 0;
+  width: 14px;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+.ribbon-h{
+  top: 50%; left: 0; right: 0;
+  height: 14px;
+  transform: translateY(-50%);
+  border-radius: 2px;
+  background: linear-gradient(180deg, #a83c28, #d9694e 45%, #a83c28);
+}
+.envelope.opening .ribbon-v{
+  transform: translateX(-50%) translateY(130%);
+  opacity: 0;
+}
+.envelope.opening .ribbon-h{
+  transform: translateY(-50%) translateX(-130%);
+  opacity: 0;
+}
+
+.bow{
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 86px; height: 54px;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  transition: transform .5s cubic-bezier(.5,0,1,.5), opacity .45s ease;
+}
+.bow-loop{
+  position: absolute;
+  top: 50%;
+  width: 40px; height: 30px;
+  background: linear-gradient(135deg, #e07d5f, #b8452f);
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  box-shadow: inset -3px -3px 8px rgba(120,40,25,.3);
+}
+.bow-loop.l{ left: 0;  transform: translateY(-50%) rotate(-16deg); }
+.bow-loop.r{ right: 0; transform: translateY(-50%) rotate(16deg);  }
+.bow-knot{
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 20px; height: 20px;
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ec8f72, #c04d36);
+  box-shadow: 0 2px 6px rgba(110,35,22,.35);
+}
+.envelope.opening .bow{
+  transform: translate(-50%,-50%) scale(.15) rotate(50deg);
+  opacity: 0;
+}
+
+.env-hint{
+  position: absolute;
+  bottom: clamp(28px, 9vh, 90px);
+  left: 0; right: 0;
+  text-align: center;
+  font-size: clamp(11px, 1.5vw, 13px);
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: rgba(45, 70, 92, .7);
+  opacity: 0;
+  transition: opacity .8s ease;
+  pointer-events: none;
+}
+.env-hint.show{ opacity: 1; animation: hintPulse 2.4s ease-in-out infinite; }
+@keyframes hintPulse{
+  0%,100%{ opacity: .55; }
+  50%    { opacity: 1; }
+}
+
+/* ============================================================
+   LETTER
+   ============================================================ */
+.letter-stage{
+  position: fixed; inset: 0;
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  padding: clamp(14px, 3vh, 32px) clamp(14px, 4vw, 32px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .8s ease;
+}
+.letter-stage.show{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.letter-card{
+  position: relative;
+  width: min(660px, 100%);
+  max-height: min(88vh, 840px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(28px, 4.5vw, 56px) clamp(24px, 5vw, 60px) clamp(28px, 4vw, 48px);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, #fffdf8 0%, #fdf8ec 100%);
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.9) inset,
+    0 40px 90px -20px rgba(40, 62, 88, .45),
+    0 8px 26px rgba(40, 62, 88, .14);
+  transform: translateY(26px) scale(.94) rotateX(8deg);
+  opacity: 0;
+  transition: transform 1s cubic-bezier(.22,1,.36,1), opacity .8s ease;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(160,140,110,.45) transparent;
+}
+.letter-stage.show .letter-card{
+  transform: translateY(0) scale(1) rotateX(0deg);
+  opacity: 1;
+  transition-delay: .1s;
+}
+.letter-card::-webkit-scrollbar{ width: 7px; }
+.letter-card::-webkit-scrollbar-thumb{
+  background: rgba(170,150,120,.4);
+  border-radius: 10px;
+}
+.letter-card::-webkit-scrollbar-track{ background: transparent; }
+
+.letter-card::before{
+  content:'';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  border-radius: 6px;
+  background-image:
+    radial-gradient(circle at 12% 22%, rgba(190,170,130,.06) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 68% 58%, rgba(190,170,130,.05) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 40% 84%, rgba(190,170,130,.05) 0 1.5px, transparent 2px);
+  background-size: 140px 140px, 180px 180px, 120px 120px;
+  opacity: .8;
+}
+
+.letter-card::after{
+  content:'';
+  position: absolute;
+  left: clamp(18px, 3.5vw, 40px);
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(193,85,63,.16) 8%, rgba(193,85,63,.16) 92%, transparent);
+  pointer-events: none;
+}
+
+.letter-head{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding-left: clamp(6px, 2vw, 22px);
+  margin-bottom: clamp(20px, 3.4vw, 34px);
+}
+.letter-to{
+  margin: 6px 0 0;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(19px, 3.4vw, 27px);
+  color: #2f4358;
+  line-height: 1.3;
+}
+.stamp{
+  flex: none;
+  width: clamp(46px, 8vw, 62px);
+  height: clamp(56px, 9.5vw, 74px);
+  border-radius: 3px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.9), rgba(255,255,255,0) 60%),
+    linear-gradient(160deg, #e9b9a8, #c1553f);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #fff8f2;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(15px, 2.4vw, 19px);
+  line-height: 1;
+  letter-spacing: .04em;
+  box-shadow: 0 2px 8px rgba(120,60,40,.28);
+  position: relative;
+  overflow: hidden;
+}
+.stamp span{
+  display: block;
+  font-size: .62em;
+  letter-spacing: .18em;
+  margin-top: 3px;
+  opacity: .9;
+}
+.stamp::after{
+  content:'';
+  position: absolute; inset: 4px;
+  border: 1px dashed rgba(255,255,255,.45);
+  border-radius: 2px;
+}
+
+.letter-body{
+  padding-left: clamp(6px, 2vw, 22px);
+}
+.letter-body p{
+  margin: 0 0 1.15em;
+  font-size: clamp(14px, 1.85vw, 16.5px);
+  line-height: 1.95;
+  font-weight: 300;
+  color: var(--ink-soft);
+  opacity: 0;
+  transform: translateY(14px);
+}
+.letter-stage.show .letter-body p{
+  animation: lineIn .85s cubic-bezier(.22,1,.36,1) forwards;
+}
+.letter-stage.show .letter-body p:nth-child(1){ animation-delay: .30s; }
+.letter-stage.show .letter-body p:nth-child(2){ animation-delay: .42s; }
+.letter-stage.show .letter-body p:nth-child(3){ animation-delay: .54s; }
+.letter-stage.show .letter-body p:nth-child(4){ animation-delay: .66s; }
+.letter-stage.show .letter-body p:nth-child(5){ animation-delay: .78s; }
+.letter-stage.show .letter-body p:nth-child(6){ animation-delay: .90s; }
+.letter-stage.show .letter-body p:nth-child(7){ animation-delay: 1.02s; }
+.letter-stage.show .letter-body p:nth-child(8){ animation-delay: 1.14s; }
+
+@keyframes lineIn{
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+.letter-body p strong{
+  font-weight: 500;
+  color: #2f4358;
+}
+
+.signature{
+  margin: clamp(22px, 4vw, 36px) 0 0;
+  padding-left: clamp(6px, 2vw, 22px);
+  text-align: right;
+  font-family: 'Dancing Script', 'Caveat', cursive;
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 600;
+  letter-spacing: .01em;
+  line-height: 1.25;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(14px);
+  font-display: swap;
+}
+.letter-stage.show .signature{
+  animation: lineIn .9s cubic-bezier(.22,1,.36,1) .92s forwards;
+}
+.signature small{
+  display: block;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: clamp(9px, 1.3vw, 10.5px);
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(120,105,85,.7);
+  margin-top: 2px;
+}
+
+.cta{
+  display: block;
+  margin: clamp(28px, 4.5vw, 42px) auto 4px;
+  padding: 15px 34px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #d9694e, #b8452f);
+  color: #fff8f2;
+  font-family: inherit;
+  font-size: clamp(12.5px, 1.7vw, 14px);
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 12px 26px -8px rgba(170, 60, 40, .65), 0 2px 0 rgba(255,255,255,.3) inset;
+  transition: transform .35s cubic-bezier(.34,1.5,.64,1), box-shadow .35s ease, filter .35s ease;
+  opacity: 0;
+}
+.letter-stage.show .cta{
+  animation: lineIn .9s cubic-bezier(.22,1,.36,1) 1.05s forwards;
+}
+.cta:hover{
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 18px 34px -10px rgba(170, 60, 40, .75), 0 2px 0 rgba(255,255,255,.3) inset;
+  filter: brightness(1.05);
+}
+.cta:active{ transform: translateY(-1px) scale(.99); }
+
+/* ============================================================
+   FINALE
+   ============================================================ */
+.finale{
+  position: fixed; inset: 0;
+  z-index: 11;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.1s ease;
+  background: radial-gradient(ellipse at 50% 45%, rgba(255,250,238,.92), rgba(255,250,238,.55) 45%, rgba(255,250,238,0) 78%);
+}
+.finale.show{ opacity: 1; pointer-events: auto; }
+
+.finale-inner{
+  max-width: 720px;
+  transform: translateY(24px) scale(.96);
+  transition: transform 1.2s cubic-bezier(.22,1,.36,1);
+}
+.finale.show .finale-inner{ transform: translateY(0) scale(1); }
+
+.finale h2{
+  margin: 0 0 18px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: clamp(26px, 5.4vw, 56px);
+  line-height: 1.16;
+  letter-spacing: -.015em;
+  color: #2b4155;
+}
+.finale h2 em{
+  display: block;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+  font-size: .82em;
+  margin-top: 6px;
+}
+.finale .finale-sub{
+  margin: 0 auto 0;
+  max-width: 520px;
+  font-size: clamp(13.5px, 1.9vw, 16px);
+  line-height: 1.85;
+  font-weight: 300;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .15s !important; }
+  .sun, .rays, .cloud{ animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== SKY ==================== -->
+<div class="sky" aria-hidden="true">
+  <div class="rays"></div>
+  <div class="sun"></div>
+  <div class="sun-core"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="cloud c4"></div>
+  <div class="cloud c5"></div>
+  <div class="haze"></div>
+</div>
+
+<!-- ==================== PETALS ==================== -->
+<canvas id="petals" aria-hidden="true"></canvas>
+
+<!-- ==================== TRAIL + PLANE ==================== -->
+<svg class="trail-svg" id="trailSvg" aria-hidden="true">
+  <path id="trailPath" pathLength="1"></path>
+</svg>
+
+<div class="plane" id="plane" aria-hidden="true">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="97,50 5,7 44,50"  fill="#ffffff"/>
+    <polygon points="97,50 44,50 32,94" fill="#d7e3ec"/>
+    <polygon points="97,50 44,50 44,54" fill="#b9cbd8" opacity=".75"/>
+    <polyline points="5,7 44,50 32,94" fill="none" stroke="#b9cbd8" stroke-width="1.1" stroke-linejoin="round"/>
+  </svg>
+</div>
+
+<!-- ==================== TITLE ==================== -->
+<header class="title-block" id="titleBlock">
+  <p class="kicker">20 · 11 · Ngày Nhà giáo Việt Nam</p>
+  <h1>A Letter <em>for</em> Teachers</h1>
+  <p class="subtitle">Chuyến bay tri ân</p>
+</header>
+
+<!-- ==================== ENVELOPE ==================== -->
+<div class="envelope-stage" id="envelopeStage">
+  <div class="envelope-holder" id="envelopeHolder">
+    <div class="envelope-drop" id="envelopeDrop">
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Mở lá thư tri ân">
+        <div class="env-back"></div>
+        <div class="env-letter"></div>
+        <div class="env-pocket"></div>
+        <div class="env-bottom"></div>
+        <div class="env-flap"></div>
+        <div class="ribbon-v"></div>
+        <div class="ribbon-h"></div>
+        <div class="bow">
+          <div class="bow-loop l"></div>
+          <div class="bow-loop r"></div>
+          <div class="bow-knot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="env-hint" id="envHint">Chạm để mở lá thư</div>
+</div>
+
+<!-- ==================== LETTER ==================== -->
+<div class="letter-stage" id="letterStage">
+  <article class="letter-card" id="letterCard">
+    <div class="letter-head">
+      <p class="letter-to" id="letterTo">Kính gửi Thầy, Cô,</p>
+      <div class="stamp">20<span>11</span></div>
+    </div>
+
+    <div class="letter-body" id="letterBody">
+      <p>Có những chuyến bay không cần đến sân bay. Chỉ cần một tờ giấy, vài nếp gấp, và một niềm tin rằng lời cảm ơn rồi sẽ tìm được đúng người để trao.</p>
+
+      <p>Chiếc máy bay giấy nhỏ này mang theo lời tri ân của chúng em — những đứa học trò từng ngồi dưới mái trường, từng run tay khi bị gọi lên bảng, từng lén nhìn thầy cô viết bảng mỗi sớm mai.</p>
+
+      <p>Thầy cô đã dạy chúng em đọc một con chữ, viết một ước mơ, và hơn hết — dạy chúng em cách trở thành một người tử tế. Những điều ấy <strong>không nằm trong sách giáo khoa</strong>, nhưng lại là hành trang lớn nhất chúng em mang theo suốt cuộc đời.</p>
+
+      <p>Ngày 20/11 này, chúng em không gửi hoa, cũng chẳng gửi quà. Chúng em chỉ gửi một chuyến bay nhỏ xíu chở đầy lời cảm ơn, và một lời hẹn: <strong>chúng em sẽ bay thật xa, nhưng sẽ không bao giờ quên nơi mình đã học cách cất cánh.</strong></p>
+
+      <p>Kính chúc Thầy Cô thật nhiều sức khoẻ, bình an, và luôn giữ được ngọn lửa của người gieo chữ.</p>
+    </div>
+
+    <p class="signature">
+      <span id="signatureName">Học trò của Thầy Cô</span>
+      <small id="signatureSub">With love · 20.11</small>
+    </p>
+
+    <button class="cta" id="ctaBtn" type="button">Gửi lời tri ân ✈</button>
+  </article>
+</div>
+
+<!-- ==================== FINALE ==================== -->
+<section class="finale" id="finale">
+  <div class="finale-inner">
+    <p class="kicker">20 · 11</p>
+    <h2>Chúc mừng Ngày Nhà giáo Việt Nam <em>Happy Teachers' Day</em></h2>
+    <p class="finale-sub" id="finaleSub">Cảm ơn Thầy Cô — những người đã dạy chúng em cách cất cánh, và luôn là bầu trời để chúng em quay về.</p>
+  </div>
+</section>
+
+<script>
+/* ============================================================
+   0. HELPERS
+   ============================================================ */
+const $ = (id) => document.getElementById(id);
+const easeInOutSine = (t) => -(Math.cos(Math.PI * t) - 1) / 2;
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+/* ============================================================
+   1. CANVAS — FALLING PETALS + CONFETTI BURST
+   ============================================================ */
+const canvas = $('petals');
+const ctx = canvas.getContext('2d');
+let DPR = Math.min(window.devicePixelRatio || 1, 2);
+let VW = window.innerWidth, VH = window.innerHeight;
+
+const PETAL_COLORS = ['#ffd3e0', '#ffe4ec', '#ffc2d4', '#fff0f4', '#ffdfe8', '#ffe9d6'];
+
+function resizeCanvas() {
+  VW = window.innerWidth;
+  VH = window.innerHeight;
+  canvas.width = Math.floor(VW * DPR);
+  canvas.height = Math.floor(VH * DPR);
+  canvas.style.width = VW + 'px';
+  canvas.style.height = VH + 'px';
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+}
+resizeCanvas();
+
+class Petal {
+  constructor(initial = false) { this.reset(initial); }
+  reset(initial = false) {
+    this.x = Math.random() * VW;
+    this.y = initial ? Math.random() * VH : -40 - Math.random() * 120;
+    this.size = 5 + Math.random() * 10;
+    this.vy = 0.28 + Math.random() * 0.75;
+    this.vx = -0.28 + Math.random() * 0.55;
+    this.rot = Math.random() * Math.PI * 2;
+    this.vr = (Math.random() - 0.5) * 0.028;
+    this.swayPhase = Math.random() * Math.PI * 2;
+    this.swaySpeed = 0.008 + Math.random() * 0.018;
+    this.swayAmp = 0.35 + Math.random() * 1.1;
+    this.alpha = 0.32 + Math.random() * 0.5;
+    this.color = PETAL_COLORS[(Math.random() * PETAL_COLORS.length) | 0];
+    this.flutter = Math.random() * Math.PI * 2;
+  }
+  update() {
+    this.swayPhase += this.swaySpeed;
+    this.flutter += 0.035;
+    this.x += this.vx + Math.sin(this.swayPhase) * this.swayAmp;
+    this.y += this.vy;
+    this.rot += this.vr;
+    if (this.y > VH + 60 || this.x < -80 || this.x > VW + 80) this.reset();
+  }
+  draw() {
+    const squash = 0.35 + Math.abs(Math.sin(this.flutter)) * 0.65;
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rot);
+    ctx.scale(1, squash);
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, this.size, this.size * 0.62, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+const petals = [];
+const PETAL_COUNT = window.innerWidth < 640 ? 22 : 36;
+for (let i = 0; i < PETAL_COUNT; i++) petals.push(new Petal(true));
+
+const bursts = [];
+
+function burst(count = 90) {
+  const cx = VW / 2;
+  const cy = VH * 0.52;
+  for (let i = 0; i < count; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 4 + Math.random() * 13;
+    bursts.push({
+      x: cx + (Math.random() - 0.5) * 60,
+      y: cy + (Math.random() - 0.5) * 40,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 4,
+      size: 5 + Math.random() * 10,
+      rot: Math.random() * Math.PI * 2,
+      vr: (Math.random() - 0.5) * 0.24,
+      life: 1,
+      decay: 0.006 + Math.random() * 0.009,
+      color: PETAL_COLORS[(Math.random() * PETAL_COLORS.length) | 0],
+      golden: Math.random() < 0.22
+    });
+  }
+}
+
+function updateBursts() {
+  for (let i = bursts.length - 1; i >= 0; i--) {
+    const p = bursts[i];
+    p.vy += 0.22;
+    p.vx *= 0.985;
+    p.vy *= 0.988;
+    p.x += p.vx;
+    p.y += p.vy;
+    p.rot += p.vr;
+    p.life -= p.decay;
+    if (p.life <= 0) bursts.splice(i, 1);
+  }
+}
+
+function drawBursts() {
+  for (const p of bursts) {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.globalAlpha = clamp(p.life, 0, 1);
+    ctx.fillStyle = p.golden ? '#e8c76a' : p.color;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+let rafId = null;
+function loop() {
+  ctx.clearRect(0, 0, VW, VH);
+  for (const p of petals) { p.update(); p.draw(); }
+  updateBursts();
+  drawBursts();
+  rafId = requestAnimationFrame(loop);
+}
+loop();
+
+/* ============================================================
+   2. PAPER PLANE FLIGHT
+   ============================================================ */
+const planeEl   = $('plane');
+const trailPath = $('trailPath');
+const trailSvg  = $('trailSvg');
+const titleBlock = $('titleBlock');
+const envelopeStage = $('envelopeStage');
+const envelopeDrop  = $('envelopeDrop');
+const envelopeHolder = $('envelopeHolder');
+const envelopeEl = $('envelope');
+const envHint = $('envHint');
+const letterStage = $('letterStage');
+const finale = $('finale');
+
+let flightStarted = false;
+let letterOpened = false;
+
+function getFlightPoints() {
+  const W = window.innerWidth;
+  const H = window.innerHeight;
+  return {
+    p0: { x: -0.16 * W, y: 0.80 * H },
+    p1: { x:  0.30 * W, y: 0.84 * H },
+    p2: { x:  0.56 * W, y: 0.02 * H },
+    p3: { x:  1.16 * W, y: 0.16 * H }
+  };
+}
+
+function bezierAt(p0, p1, p2, p3, t) {
+  const u = 1 - t;
+  return {
+    x: u*u*u*p0.x + 3*u*u*t*p1.x + 3*u*t*t*p2.x + t*t*t*p3.x,
+    y: u*u*u*p0.y + 3*u*u*t*p1.y + 3*u*t*t*p2.y + t*t*t*p3.y
+  };
+}
+
+function bezierTangent(p0, p1, p2, p3, t) {
+  const u = 1 - t;
+  return {
+    x: 3*u*u*(p1.x - p0.x) + 6*u*t*(p2.x - p1.x) + 3*t*t*(p3.x - p2.x),
+    y: 3*u*u*(p1.y - p0.y) + 6*u*t*(p2.y - p1.y) + 3*t*t*(p3.y - p2.y)
+  };
+}
+
+function startFlight() {
+  if (flightStarted) return;
+  flightStarted = true;
+
+  const { p0, p1, p2, p3 } = getFlightPoints();
+
+  trailPath.setAttribute(
+    'd',
+    `M ${p0.x} ${p0.y} C ${p1.x} ${p1.y}, ${p2.x} ${p2.y}, ${p3.x} ${p3.y}`
+  );
+  trailPath.style.strokeDashoffset = 1;
+
+  planeEl.style.opacity = '1';
+
+  const DURATION = 4200;
+  const startTime = performance.now();
+
+  function frame(now) {
+    const raw = clamp((now - startTime) / DURATION, 0, 1);
+    const t = easeInOutSine(raw);
+
+    const pos = bezierAt(p0, p1, p2, p3, t);
+    const tan = bezierTangent(p0, p1, p2, p3, t);
+    const angle = Math.atan2(tan.y, tan.x) * (180 / Math.PI);
+
+    planeEl.style.transform =
+      `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) rotate(${angle}deg)`;
+
+    trailPath.style.strokeDashoffset = (1 - t).toFixed(4);
+
+    if (raw > 0.86) {
+      planeEl.style.opacity = String(1 - (raw - 0.86) / 0.14);
+    }
+
+    if (raw < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      planeEl.style.opacity = '0';
+      setTimeout(() => { trailSvg.style.opacity = '0'; }, 900);
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ============================================================
+   3. ENVELOPE DELIVERY
+   ============================================================ */
+function dropEnvelope() {
+  envelopeDrop.classList.add('fall');
+  titleBlock.classList.add('dim');
+
+  setTimeout(() => {
+    envelopeStage.classList.add('landed');
+    envelopeHolder.classList.add('idle');
+    envHint.classList.add('show');
+  }, 2000);
+}
+
+/* ============================================================
+   4. OPEN THE LETTER
+   ============================================================ */
+function openLetter() {
+  if (letterOpened) return;
+  letterOpened = true;
+
+  envelopeStage.classList.remove('landed');
+  envHint.classList.remove('show');
+
+  envelopeEl.classList.add('opening');
+
+  setTimeout(() => envelopeEl.classList.add('open'), 480);
+  setTimeout(() => envelopeEl.classList.add('lift'), 1150);
+
+  setTimeout(() => {
+    envelopeStage.classList.add('gone');
+    letterStage.classList.add('show');
+  }, 1780);
+}
+
+envelopeStage.addEventListener('click', openLetter);
+envelopeEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    openLetter();
+  }
+});
+
+/* ============================================================
+   5. FINALE
+   ============================================================ */
+$('ctaBtn').addEventListener('click', () => {
+  letterStage.classList.remove('show');
+  setTimeout(() => {
+    letterStage.style.display = 'none';
+    finale.classList.add('show');
+    burst(120);
+    setTimeout(() => burst(70), 420);
+    setTimeout(() => burst(50), 900);
+  }, 620);
+});
+
+/* ============================================================
+   6. TIMELINE
+   ============================================================ */
+window.addEventListener('load', () => {
+  setTimeout(startFlight, 750);
+  setTimeout(dropEnvelope, 2750);
+});
+
+/* ============================================================
+   7. RESIZE
+   ============================================================ */
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    resizeCanvas();
+  }, 180);
+});
+
+/* ============================================================
+   8. PERSONALIZATION — đọc nội dung từ URL hash (#d=...)
+   ============================================================ */
+(function () {
+  if (location.hash.indexOf('#d=') !== 0) return;
+
+  let data;
+  try {
+    const b64 = location.hash.slice(3).replace(/-/g, '+').replace(/_/g, '/');
+    const pad = '==='.slice((b64.length + 3) % 4);
+    const bin = atob(b64 + pad);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    data = JSON.parse(new TextDecoder().decode(bytes));
+  } catch (e) {
+    console.warn('Link không hợp lệ, dùng nội dung mặc định.', e);
+    return;
+  }
+
+  const get = id => document.getElementById(id);
+
+  if (typeof data.to === 'string') {
+    const el = get('letterTo');
+    if (el) el.textContent = data.to;
+  }
+
+  if (Array.isArray(data.paragraphs)) {
+    const paras = data.paragraphs.map(p => String(p || '').trim()).filter(Boolean);
+    const body = get('letterBody');
+    if (body && paras.length) {
+      body.innerHTML = '';
+      paras.forEach((text, i) => {
+        const p = document.createElement('p');
+        p.textContent = text;
+        p.style.animationDelay = (0.30 + i * 0.12) + 's';
+        body.appendChild(p);
+      });
+    }
+  }
+
+  if (typeof data.signature === 'string') {
+    const el = get('signatureName');
+    if (el) el.textContent = data.signature;
+  }
+
+  if (typeof data.signatureSub === 'string') {
+    const el = get('signatureSub');
+    if (el) el.textContent = data.signatureSub;
+  }
+
+  if (typeof data.finale === 'string') {
+    const el = get('finaleSub');
+    if (el) el.textContent = data.finale;
+  }
+})();
+</script>
+</body>
+</html>
